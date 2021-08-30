@@ -7,29 +7,23 @@ import Media from './configs/Media'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import Layout from "./layouts/Layout"
 import Home from "./pages/Home"
+import PokemonDetail from "./pages/PokemonDetail/PokemonDetail"
 
-const Button = styled.button`
-  background: ${({ theme }) => theme.buttonBackground};
-  color: ${({ theme }) => theme.buttonText};
-  width: 100%;
+// const Button = styled.button`
+//   background: ${({ theme }) => theme.buttonBackground};
+//   color: ${({ theme }) => theme.buttonText};
+//   width: 100%;
 
-  ${Media.tab`
-    background: red;
-  `}
+//   ${Media.tab`
+//     background: red;
+//   `}
 
-  ${
-    Media.laptop`
-      background: green;
-    `
-  }
-`
-
-const About = () => {
-
-  return (
-    <h1> About </h1>
-  )
-}
+//   ${
+//     Media.laptop`
+//       background: green;
+//     `
+//   }
+// `
 
 function App() {
   const [theme, toggleTheme, isMounted] = useThemeMode()
@@ -50,7 +44,7 @@ function App() {
         <Layout>
           <Switch>
             <Route path='/' component={Home} exact />
-            <Route path='/about' component={About} exact />
+            <Route path='/pokemon/:name' component={PokemonDetail} exact />
           </Switch>
         </Layout>
       </Router>

@@ -9,7 +9,7 @@ import "swiper/swiper-bundle.min.css";
 export const Wrapper = styled.section`
     display: flex;
     flex-direction: column;
-    margin: 0 0 50px;
+    margin: 30px 0 50px;
 
     ${Media.tab`
         padding: 0 30px;
@@ -25,7 +25,7 @@ export const Heading = styled.div`
     margin: 0 16px 20px;
 
     ${Media.tab`
-        margin: 50px 0 20px;
+        margin: 30px 0 20px;
     `}
 
     h2 {

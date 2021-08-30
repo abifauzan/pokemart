@@ -11,24 +11,57 @@ export const MainHeader = styled.header`
     flex-direction: column;
     padding: 10px 16px;
     align-items: center;
+    background: ${Color.white};
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 
     ${Media.tab`
         flex-direction: row;
         justify-content: space-between;
         padding: 10px 30px;
         height: 100%;
+        margin: 30px 30px 0;
+        border-radius: 20px;
     `}
+`
+
+export const HeaderTop = styled.nav`
+    width: 100%;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 
     img {
         width: 120px;
 
         ${Media.tab`
-            width: 150px;
+            justify-content: flex-start;
+        `}
+    }
+
+    svg {
+        width: 25px;
+        height: 25px;
+
+        ${Media.tab`
+            display: none;
+        `}
+    }
+
+    div {
+        width: 25px;
+        height: 25px;
+
+        ${Media.tab`
+            display: none;
         `}
     }
 `
 
 export const NavDesktop = styled.nav`
+    width: 100%;
     border-radius: 10px;
     display: flex;
     justify-content: flex-end;
@@ -77,7 +110,7 @@ export const SearchBoxMobile = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    margin: 20px 0;
+    margin: 20px 0 10px;
 
     input {
         flex: 3;

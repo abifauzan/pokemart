@@ -1,6 +1,7 @@
 import React from 'react';
 import pokemon_logo from '../../assets/Images/pokemon-logo.png'
 import { FaBeer, FaSearch } from 'react-icons/fa';
+import { IoChevronBackOutline } from 'react-icons/io5';
 import useIsMobile from '../../hooks/useIsMobile'
 import {
     MainHeader,
@@ -8,12 +9,13 @@ import {
     Item,
     SearchBoxMobile,
     ButtonSearch,
+    HeaderTop,
 } from './HeaderStyle'
-import { useHistory, useLocation } from "react-router-dom";
+import useGetHistory from '../../hooks/useGetHistory';
 
-function Header({ isHome, text }) {
+function Header(props) {
 
-    const { pathname } = useLocation()
+    const { pathname } = useGetHistory()
     const isMobile = useIsMobile()
 
     const logo = (
@@ -27,6 +29,24 @@ function Header({ isHome, text }) {
                 <FaSearch />
             </ButtonSearch>
         </SearchBoxMobile>
+    )
+
+    const header = pathname === '/' ? (
+        <>
+            <HeaderTop>
+                <div />
+                    {logo}
+                <div />
+                
+            </HeaderTop>
+            {isMobile && searchBox}
+        </>
+    ) : (
+        <HeaderTop>
+            <IoChevronBackOutline />
+            {logo}
+            <div />
+        </HeaderTop>
     )
 
     const navDesktop = (
@@ -53,9 +73,7 @@ function Header({ isHome, text }) {
     )
     return (
         <MainHeader>
-            {logo}
-            {isMobile && searchBox}
-
+            {header}
             {!isMobile && navDesktop}
         </MainHeader>
     );
