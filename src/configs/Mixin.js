@@ -6,6 +6,7 @@ import {
 import Color from './Color'
 
 export const TextSize = {
+    headingLg: '32px',
     headingNav: '20px',
     headingBox: '26px',
     headingTitle: '22px',

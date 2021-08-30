@@ -7,6 +7,10 @@ export const Wrapper = styled.section`
     padding: 0 16px;
     display: flex;
     flex-direction: column;
+
+    ${Media.tab`
+        padding: 0 30px;
+    `}
 `
 
 export const Heading = styled.div`
@@ -42,6 +46,6 @@ export const List = styled.div`
     ${Media.tab`
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         column-gap: 30px;
-        row-gap: 90px;
+        row-gap: 60px;
     `}
 `

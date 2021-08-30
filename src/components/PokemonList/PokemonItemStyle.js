@@ -27,8 +27,8 @@ export const ItemImg = styled.img`
     top: -35px;
 
     ${Media.tab`
-        width: 180px;
-        top: -60px;
+        width: 150px;
+        top: -40px;
     `}
 `
 
