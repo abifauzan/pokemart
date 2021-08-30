@@ -143,7 +143,7 @@ export const DesktopView = styled.div`
 
 export const ItemDesktopFirst = styled.div`
     padding: 20px;
-    background: ${SetGradient('grass', 270).background};
+    background: ${SetGradient('fire', 270).background};
     position: relative;
     overflow: hidden;
     display: flex;

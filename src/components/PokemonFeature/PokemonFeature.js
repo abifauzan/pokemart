@@ -97,7 +97,7 @@ function PokemonFeature(props) {
                     <span>Grass</span>
                 </div>
                 <span className='id'>#11</span>
-                <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='' />
+                <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png'} alt='' />
             </ItemDesktopFirst>
             <ItemDesktop>
                 <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='image' />

@@ -9,9 +9,11 @@ import {
     SearchBoxMobile,
     ButtonSearch,
 } from './HeaderStyle'
+import { useHistory, useLocation } from "react-router-dom";
 
 function Header({ isHome, text }) {
 
+    const { pathname } = useLocation()
     const isMobile = useIsMobile()
 
     const logo = (
@@ -29,13 +31,22 @@ function Header({ isHome, text }) {
 
     const navDesktop = (
         <NavDesktop>
-            <Item to='/'>
+            <Item 
+                to='/'
+                isactive={pathname === '/' ? 1 : undefined}
+            >
                 Home
             </Item>
-            <Item to='/'>
+            <Item 
+                to='/my-pokemon'
+                isactive={pathname === '/my-pokemon' ? 1 : undefined}
+            >
                 My Pokemon
             </Item>
-            <Item to='/'>
+            <Item 
+                to='/'
+                isactive={pathname === '/catch' ? 1 : undefined}
+            >
                 Capture
             </Item>
         </NavDesktop>

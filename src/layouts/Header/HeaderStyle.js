@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Media from '../../configs/Media';
 import Color from '../../configs/Color'
 import {
-    SetFont, TextSize,
+    SetFont, TextSize, TextWeight,
 } from '../../configs/Mixin'
 
 export const MainHeader = styled.header`
@@ -16,6 +16,7 @@ export const MainHeader = styled.header`
         flex-direction: row;
         justify-content: space-between;
         padding: 10px 30px;
+        height: 100%;
     `}
 
     img {
@@ -35,14 +36,40 @@ export const NavDesktop = styled.nav`
 `
 
 export const Item = styled(Link)`
-    margin-left: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #333;
+    height: 100%;
+    /* background: yellow; */
+    padding: 20px 0;
+    margin: 0 20px;
+    position: relative;
+
+    ${SetFont({
+        size: TextSize.bodySm,
+        color: ({ isactive }) => isactive ? Color.primary : Color.normal.primary,
+        weight: TextWeight.bold,
+    })}
+
+    &::after {
+        content: '';
+        width: 50%;
+        height: 3px;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        border-radius: 10px;
+        background: ${({ isactive }) => isactive ? Color.primary : 'transparent'};
+    }
 
     &:first-child {
-        margin-left: unset;
+        /* margin-left: unset; */
+    }
+
+    &:last-child {
+        padding: unset;
+        margin: unset;
+
+        &::after {
+            display: none;
+        }
     }
 `
 

@@ -62,7 +62,7 @@ const Color = {
         primary: '#341f97',
     },
     dark: {
-        light: '#40407a',
+        light: '#6a89cc',
         primary: '#2c2c54',
     },
     dragon: {
