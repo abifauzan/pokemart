@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import Layout from "./layouts/Layout"
 import Home from "./pages/Home"
 import PokemonDetail from "./pages/PokemonDetail/PokemonDetail"
+import PokemonCollection from "./pages/PokemonCollection/PokemonCollection"
 
 // const Button = styled.button`
 //   background: ${({ theme }) => theme.buttonBackground};
@@ -45,6 +46,7 @@ function App() {
           <Switch>
             <Route path='/' component={Home} exact />
             <Route path='/pokemon/:name' component={PokemonDetail} exact />
+            <Route path='/my-pokemon' component={PokemonCollection} exact />
           </Switch>
         </Layout>
       </Router>

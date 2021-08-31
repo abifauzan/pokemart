@@ -291,6 +291,4 @@ export const ItemDesktop = styled.div`
             weight: TextWeight.bold
         })}
     }
-
-    
 `

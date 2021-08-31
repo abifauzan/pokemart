@@ -32,6 +32,7 @@ import {
     DescHeading,
     DescBody,
     Hr,
+    TypeContainer,
 } from './PokemonDetailStyle';
 import { SwiperSlide } from 'swiper/react';
 import useGetHistory from '../../hooks/useGetHistory';
@@ -51,7 +52,7 @@ function PokemonDetail(props) {
         <Container>
             <Menu
                 slidesPerView='auto'
-                spaceBetween={15}
+                spaceBetween={20}
                 centeredSlides={false}
                 style={{ paddingLeft: '16px'}}
             >
@@ -67,36 +68,96 @@ function PokemonDetail(props) {
                         isactive={page === 'evolutions' ? 1 : undefined}
                     > Evolutions </Item>
                 </SwiperSlide>
-                <SwiperSlide>
-                    <Item
-                        onClick={() => setPage('statistics')}
-                        isactive={page === 'statistics' ? 1 : undefined}
-                    > Statistics </Item>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Item
-                        onClick={() => setPage('moves')}
-                        isactive={page === 'moves' ? 1 : undefined}
-                    > Moves </Item>
-                </SwiperSlide>
                 <SwiperSlide></SwiperSlide>
                 <SwiperSlide></SwiperSlide>
             </Menu>
 
             <Body isactive={page==='general'}>
                 <PokemonTitle>Bulbasaur</PokemonTitle>
-                <PokemonType>
-                    <div className='item'>
-                        <img src={getThemePokemonImage('grass')} />
-                        <span>grass</span>
+                <TypeContainer>
+                    <div className='type'>
+                        <img src={getThemePokemonImage('fire')} alt='pokemon' />
+                        <span>fire</span>
                     </div>
-                    <div className='item'>
-                        <img src={getThemePokemonImage('water')} />
+                    <div className='type'>
+                        <img src={getThemePokemonImage('water')} alt='pokemon' />
                         <span>water</span>
                     </div>
-                </PokemonType>
+                </TypeContainer>
                 <PokemonImage src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='pokemon' />
                 <ButtonCatch />
+
+                <TextColumnThree>
+                    <div>
+                        <TextColumnThreeSpan >Weight</TextColumnThreeSpan>
+                        <TextColumnThreeSpan >
+                            2.44
+                        </TextColumnThreeSpan>
+                    </div>
+                    <div>
+                        <TextColumnThreeSpan >Height</TextColumnThreeSpan>
+                        <TextColumnThreeSpan >
+                            2.44
+                        </TextColumnThreeSpan>
+                    </div>
+                    <div>
+                        <TextColumnThreeSpan >Base Exp</TextColumnThreeSpan>
+                        <TextColumnThreeSpan >
+                            2.44
+                        </TextColumnThreeSpan>
+                    </div>
+                </TextColumnThree>
+            
+                <GridThreeColumn>
+                    <GridColumnText>Gender</GridColumnText>
+                    <GridColumnText><IoMdMale /></GridColumnText>
+                    <GridColumnText><IoMdFemale /></GridColumnText>
+                </GridThreeColumn>
+
+                <GridTwoColumn>
+                    <GridColumnText>Base Happiness</GridColumnText>
+                    <GridColumnText className='bold'>70</GridColumnText>
+                    <GridColumnText>Capture Rate</GridColumnText>
+                    <GridColumnText className='bold'>45</GridColumnText>
+                    <GridColumnText>Habitat</GridColumnText>
+                    <GridColumnText className='bold'>Grassland</GridColumnText>
+                </GridTwoColumn>
+
+                <StatsWrapper>
+                    <StatsText>
+                        HP
+                    </StatsText>
+                    <StatsText className='bold'>214</StatsText>
+                    <ProgressBar>
+                        <progress max='100' value='50' />
+                    </ProgressBar>
+
+                    <StatsText>Attack</StatsText>
+                    <StatsText className='bold'>214</StatsText>
+                    <ProgressBar>
+                        <progress max='100' value='50' />
+                    </ProgressBar>
+
+                    <StatsText>Defense</StatsText>
+                    <StatsText className='bold'>214</StatsText>
+                    <ProgressBar>
+                        <progress max='100' value='50' />
+                    </ProgressBar>
+
+                    <StatsText>Special Attack</StatsText>
+                    <StatsText className='bold'>214</StatsText>
+                    <ProgressBar>
+                        <progress max='100' value='50' />
+                    </ProgressBar>
+
+                    <StatsText>Special Defense</StatsText>
+                    <StatsText className='bold'>214</StatsText>
+                    <ProgressBar>
+                        <progress max='100' value='50' />
+                    </ProgressBar>
+
+                </StatsWrapper>
+            
             </Body>
 
             <Body isactive={page==='evolutions'}>
@@ -188,60 +249,6 @@ function PokemonDetail(props) {
             
             </Body>
         
-            <Body isactive={page==='statistics'}>
-                <StatsWrapper>
-                    <StatsText>
-                        HP
-                    </StatsText>
-                    <StatsText className='bold'>214</StatsText>
-                    <ProgressBar>
-                        <progress max='100' value='50' />
-                    </ProgressBar>
-
-                    <StatsText>HP</StatsText>
-                    <StatsText className='bold'>214</StatsText>
-                    <ProgressBar>
-                        <progress max='100' value='50' />
-                    </ProgressBar>
-                </StatsWrapper>
-            </Body>
-        
-            <Body isactive={page==='moves'}>
-                <MovesItem>
-                    <MovesItemText>
-                        Tackle
-                    </MovesItemText>
-                    <MovesItemText 
-                        className='level' 
-                        isactive={page==='moves'}
-                    >
-                        Level 1
-                    </MovesItemText>
-                </MovesItem>
-                <MovesItem>
-                    <MovesItemText>
-                        Tackle
-                    </MovesItemText>
-                    <MovesItemText 
-                        className='level' 
-                        isactive={page==='moves'}
-                    >
-                        Level 1
-                    </MovesItemText>
-                </MovesItem>
-                <MovesItem>
-                    <MovesItemText>
-                        Tackle
-                    </MovesItemText>
-                    <MovesItemText 
-                        className='level' 
-                        isactive={page==='moves'}
-                    >
-                        Level 1
-                    </MovesItemText>
-                </MovesItem>
-            </Body>
-        
         </Container>
     )
 
@@ -275,18 +282,6 @@ function PokemonDetail(props) {
                                 isactive={page === 'evolutions' ? 1 : undefined}
                             > Evolutions </Item>
                         </SwiperSlide>
-                        <SwiperSlide>
-                            <Item
-                                onClick={() => setPage('statistics')}
-                                isactive={page === 'statistics' ? 1 : undefined}
-                            > Statistics </Item>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Item
-                                onClick={() => setPage('moves')}
-                                isactive={page === 'moves' ? 1 : undefined}
-                            > Moves </Item>
-                        </SwiperSlide>
                         <SwiperSlide></SwiperSlide>
                         <SwiperSlide></SwiperSlide>
                     </Menu>
@@ -294,17 +289,16 @@ function PokemonDetail(props) {
                     <BodyDesktop isactive={page === 'general'}>
                         <DesktopViewCopy>
                             <h2>Bulbasaur</h2>
-                            <div className='typeContainer'>
+                            <TypeContainer>
                                 <div className='type'>
                                     <img src={getThemePokemonImage('fire')} alt='pokemon' />
                                     <span>fire</span>
                                 </div>
-                                {/* <div className='dot' /> */}
                                 <div className='type'>
                                     <img src={getThemePokemonImage('water')} alt='pokemon' />
                                     <span>water</span>
                                 </div>
-                            </div>
+                            </TypeContainer>
                         </DesktopViewCopy>
 
                         <TextColumnThree>
@@ -328,7 +322,6 @@ function PokemonDetail(props) {
                             </div>
                         </TextColumnThree>
 
-
                         <GridThreeColumn>
                             <GridColumnText>Gender</GridColumnText>
                             <GridColumnText><IoMdMale /></GridColumnText>
@@ -346,12 +339,49 @@ function PokemonDetail(props) {
 
                         <DescHeading nomargin> Abilities </DescHeading>
                         <Hr />
+                        <DescHeading nomargin> Overgrow </DescHeading>
+                        <DescBody> 
+                            Anim officia culpa consectetur ea ipsum nulla esse ut aute aute Lorem sunt minim.
+                        </DescBody>
+                        <DescHeading nomargin> Overgrow </DescHeading>
                         <DescBody> 
                             Anim officia culpa consectetur ea ipsum nulla esse ut aute aute Lorem sunt minim.
                         </DescBody>
 
+                        <StatsWrapper>
+                            <StatsText>
+                                HP
+                            </StatsText>
+                            <StatsText className='bold'>214</StatsText>
+                            <ProgressBar>
+                                <progress max='100' value='50' />
+                            </ProgressBar>
 
-                        
+                            <StatsText>Attack</StatsText>
+                            <StatsText className='bold'>214</StatsText>
+                            <ProgressBar>
+                                <progress max='100' value='50' />
+                            </ProgressBar>
+
+                            <StatsText>Defense</StatsText>
+                            <StatsText className='bold'>214</StatsText>
+                            <ProgressBar>
+                                <progress max='100' value='50' />
+                            </ProgressBar>
+
+                            <StatsText>Special Attack</StatsText>
+                            <StatsText className='bold'>214</StatsText>
+                            <ProgressBar>
+                                <progress max='100' value='50' />
+                            </ProgressBar>
+
+                            <StatsText>Special Defense</StatsText>
+                            <StatsText className='bold'>214</StatsText>
+                            <ProgressBar>
+                                <progress max='100' value='50' />
+                            </ProgressBar>
+
+                        </StatsWrapper>
 
                     </BodyDesktop>
 
@@ -497,58 +527,7 @@ function PokemonDetail(props) {
                         </List>
                     
                     </BodyDesktop>
-                    <BodyDesktop isactive={page === 'statistics'}>
-                        <StatsWrapper>
-                            <StatsText>
-                                HP
-                            </StatsText>
-                            <StatsText className='bold'>214</StatsText>
-                            <ProgressBar>
-                                <progress max='100' value='50' />
-                            </ProgressBar>
-
-                            <StatsText>HP</StatsText>
-                            <StatsText className='bold'>214</StatsText>
-                            <ProgressBar>
-                                <progress max='100' value='50' />
-                            </ProgressBar>
-                        </StatsWrapper>
-                    </BodyDesktop>
-                    <BodyDesktop isactive={page === 'moves'}>
-                        <MovesItem>
-                            <MovesItemText>
-                                Tackle
-                            </MovesItemText>
-                            <MovesItemText 
-                                className='level' 
-                                isactive={page==='moves'}
-                            >
-                                Level 1
-                            </MovesItemText>
-                        </MovesItem>
-                        <MovesItem>
-                            <MovesItemText>
-                                Tackle
-                            </MovesItemText>
-                            <MovesItemText 
-                                className='level' 
-                                isactive={page==='moves'}
-                            >
-                                Level 1
-                            </MovesItemText>
-                        </MovesItem>
-                        <MovesItem>
-                            <MovesItemText>
-                                Tackle
-                            </MovesItemText>
-                            <MovesItemText 
-                                className='level' 
-                                isactive={page==='moves'}
-                            >
-                                Level 1
-                            </MovesItemText>
-                        </MovesItem>
-                    </BodyDesktop>
+                    
                     
                 </DesktopViewDetail>
             </DesktopView>

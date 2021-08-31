@@ -47,7 +47,7 @@ export const Item = styled.button`
 export const Body = styled.div`
     margin: 16px;
     border-radius: 20px;
-    /* height: 80vh; */
+    min-height: 50vh;
     display: ${({ isactive }) => isactive ? 'flex' : 'none'};
     flex-direction: column;
     align-items: center;
@@ -191,18 +191,22 @@ export const ItemArrow = styled.div`
 export const StatsWrapper = styled.div`
     width: calc(100% - 32px);
     display: grid;
-    grid-template-columns: 1fr 1fr 4fr;
+    grid-template-columns: 4fr 1fr 4fr;
     grid-column-gap: 0;
-    grid-row-gap: 5px;
+    grid-row-gap: 15px;
     margin: 20px;
+
+    ${Media.tab`
+        grid-template-columns: 3fr 1fr 4fr;
+    `}
 `
 
 export const StatsText = styled.span`
-        ${SetFont({
-            size: TextSize.bodySm,
-            color: Color.dark.primary,
-            weight: TextWeight.regular,
-        })}
+    ${SetFont({
+        size: TextSize.bodySm,
+        color: Color.dark.primary,
+        weight: TextWeight.regular,
+    })}
 
     &.bold {
         font-weight: ${TextWeight.bold};
@@ -288,9 +292,9 @@ export const DesktopViewPokemon = styled.div`
     overflow: hidden;
 
     img {
-        width: 250px;
+        width: 300px;
         flex-shrink: 0;
-        margin: 80px 0 20px;
+        margin: 150px 0 20px;
         position: relative;
         z-index: 1;
     }
@@ -325,7 +329,10 @@ export const DesktopViewDetail = styled.div`
     flex-direction: column;
     background: ${Color.white};
     position: relative;
-    border-radius: 30px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
     height: calc(105% - 40px);
     bottom: 5%;
     padding: 20px 0 20px;
@@ -346,36 +353,44 @@ export const DesktopViewCopy = styled.div`
         })}
         margin: 20px 0 20px;
     }
+`
 
-    div.typeContainer {
-        width: 100%;
+export const TypeContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div.type {
         display: flex;
-        justify-content: center;
         align-items: center;
+        margin-right: 10px;
 
-        div.type {
-            display: flex;
-            align-items: center;
-            margin-right: 10px;
+        &:last-child {
+            margin-right: 0;
+        }
 
-            &:last-child {
-                margin-right: 0;
-            }
+        img {
+            flex-shrink: 0;
+            width: 20px;
+            margin-right: 5px;
+        }
 
-            img {
-                flex-shrink: 0;
-                width: 20px;
-                margin-right: 5px;
-            }
+        span {
+            ${SetFont({
+                size: TextSize.bodySm,
+                color: Color.dark,
+                weight: TextWeight.bold,
+            })}
+            text-transform: capitalize;
 
-            span {
+            ${Media.tab`
                 ${SetFont({
                     size: TextSize.body,
                     color: Color.dark,
                     weight: TextWeight.bold,
                 })}
-                text-transform: capitalize;
-            }
+            `}
         }
     }
 `
@@ -397,10 +412,16 @@ export const BodyDesktop = styled.div`
 export const TextColumnThree = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     padding: 20px;
+    width: 80%;
+
+    ${Media.tab`
+        width: unset;
+        justify-content: space-evenly;
+    `}
 
     div {
         display: flex;
@@ -428,16 +449,32 @@ export const TextColumnThreeSpan = styled.span`
 `
 
 export const GridTwoColumn = styled.div`
-    /* width: 100%; */
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 4fr 3fr;
     grid-column-gap: 10px;
     grid-row-gap: 5px;
     padding: 20px;
+    width: 90%;
+
+    ${Media.tab`
+        grid-template-columns: 2fr 3fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 5px;
+        padding: 20px;
+        width: unset;
+    `}
 `
 
 export const GridThreeColumn = styled(GridTwoColumn)`
-    grid-template-columns: 150px 40px 40px;
+    grid-template-columns: 1fr 40px 1fr;
+    padding: 20px 20px 0;
+    width: 90%;
+
+    ${Media.tab`
+        width: unset;
+        grid-template-columns: 150px 40px 40px;
+        padding: 20px 20px 0;
+    `}
 
     svg {
         width: 25px;
