@@ -5,6 +5,7 @@ import Header from './Header/Header';
 import MenuMobile from './MenuMobile/MenuMobile';
 import useIsMobile from '../hooks/useIsMobile'
 import Color from '../configs/Color';
+import useGetHistory from '../hooks/useGetHistory';
 
 const MainLayout = styled.main`
     width: 100%;
@@ -31,7 +32,7 @@ const MainContainer = styled.div`
     z-index: 3;
 
     ${Media.tab`
-
+        padding-bottom: 0;
     `}
 `
 
@@ -63,6 +64,10 @@ const ContentBlur = styled.div`
 function Layout({ children }) {
 
     const isMobile = useIsMobile()
+    const { pathname } = useGetHistory()
+    const pokemonDetailPage = pathname.split('/')[1] === 'pokemon'
+
+    console.log(pokemonDetailPage);
 
     return (
         <MainLayout>
@@ -70,13 +75,14 @@ function Layout({ children }) {
                 <Header />
                 {isMobile && <MenuMobile />}
                 {children}
-
-                
             </MainContainer>
-            <ContentBlur>
-                <div className='blurTop' />
-                <div className='blurBottom' />
-            </ContentBlur>
+            {pokemonDetailPage && isMobile && (
+                <ContentBlur>
+                    <div className='blurTop' />
+                    <div className='blurBottom' />
+                </ContentBlur>
+            )}
+            
         </MainLayout>
     );
 }

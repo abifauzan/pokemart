@@ -2,14 +2,25 @@ import styled from "styled-components";
 import Color from '../../configs/Color';
 import { SetFont, SetGradient, TextSize, TextWeight } from '../../configs/Mixin';
 import { Swiper } from 'swiper/react';
+import Media from '../../configs/Media';
 
 export const Container = styled.section`
     padding: 16px 0 0;
+
+    ${Media.tab`
+        padding: 30px;
+    `}
 `
+
+// Mobile Style
 
 export const Menu = styled(Swiper)`
     width: 100%;
     padding: 0 0 10px;
+
+    ${Media.tab`
+        padding-bottom: 50px;
+    `}
 
     .swiper-wrapper {
         .swiper-slide {
@@ -123,6 +134,10 @@ export const ListItem = styled.div`
     &:last-child {
         border-bottom: unset;
     }
+
+    ${Media.tab`
+        padding: 0 20px 20px;
+    `}
 `
 
 export const ItemPokemon = styled.div`
@@ -247,5 +262,133 @@ export const MovesItemText = styled.span`
             color: Color.primary,
             weight: TextWeight.bold,
         })}
+    }
+`
+
+// Desktop Style
+
+export const DesktopView = styled.section`
+    width: 100%;
+    height: calc(100vh - 210px);
+    background: ${SetGradient('electric', 33).background};
+    border-radius: 20px;
+    margin-top: 30px;
+    position: relative;
+    display: flex;
+    box-shadow: 5px 5px 19px #eaeaea,
+        -5px -5px 19px #f0f8ff;
+`
+
+export const DesktopViewPokemon = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    img {
+        width: 250px;
+        flex-shrink: 0;
+        margin: 80px 0 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    span.id {
+        ${SetFont({
+            size: '180px',
+            color: 'rgba(255,255,255, .5)',
+            weight: TextWeight.bold,
+        })}
+        letter-spacing: 7px;
+        position: absolute;
+        top: -50px;
+        left: -30px;
+    }
+`
+
+export const DesktopButtonCatch = styled.button`
+    width: 80px;
+    height: 80px;
+    border-radius: 9999px;
+    background: ${Color.primary};
+    margin: 20px 0 0;
+`
+
+export const DesktopViewDetail = styled.div`
+    /* flex: 1; */
+    width: calc(50% - 40px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: ${Color.white};
+    position: relative;
+    border-radius: 30px;
+    height: calc(105% - 40px);
+    bottom: 5%;
+    padding: 20px 0 20px;
+    overflow: hidden;
+`
+
+export const DesktopViewCopy = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        ${SetFont({
+            size: '40px',
+            color: Color.dark.primary,
+            weight: TextWeight.bold
+        })}
+        margin: 0 0 20px;
+    }
+
+    div.typeContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        div.type {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            img {
+                flex-shrink: 0;
+                width: 20px;
+                margin-right: 5px;
+            }
+
+            span {
+                ${SetFont({
+                    size: TextSize.body,
+                    color: Color.dark,
+                    weight: TextWeight.bold,
+                })}
+                text-transform: capitalize;
+            }
+        }
+    }
+`
+
+export const BodyDesktop = styled.div`
+    width: 100%;
+    height: 100%;
+    display: ${({ isactive }) => isactive ? 'flex' : 'none'};
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 0px; /* Remove scrollbar space */
+        background: transparent; /* Optional: just make scrollbar invisible */
     }
 `
