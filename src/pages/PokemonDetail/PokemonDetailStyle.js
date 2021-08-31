@@ -304,7 +304,8 @@ export const DesktopViewPokemon = styled.div`
         letter-spacing: 7px;
         position: absolute;
         top: -50px;
-        left: -30px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 `
 
@@ -343,7 +344,7 @@ export const DesktopViewCopy = styled.div`
             color: Color.dark.primary,
             weight: TextWeight.bold
         })}
-        margin: 0 0 20px;
+        margin: 20px 0 20px;
     }
 
     div.typeContainer {
@@ -391,4 +392,105 @@ export const BodyDesktop = styled.div`
         width: 0px; /* Remove scrollbar space */
         background: transparent; /* Optional: just make scrollbar invisible */
     }
+`
+
+export const TextColumnThree = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+    }
+`
+
+export const TextColumnThreeSpan = styled.span`
+    &:first-child {
+        ${SetFont({
+            size: TextSize.body,
+            color: Color.dark.primary,
+            weight: TextWeight.medium,
+        })}
+        padding-bottom: 5px;
+    }
+    &:last-child {
+        ${SetFont({
+            size: TextSize.body,
+            color: Color.primary,
+            weight: TextWeight.bold,
+        })}
+    }
+`
+
+export const GridTwoColumn = styled.div`
+    /* width: 100%; */
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 5px;
+    padding: 20px;
+`
+
+export const GridThreeColumn = styled(GridTwoColumn)`
+    grid-template-columns: 150px 40px 40px;
+
+    svg {
+        width: 25px;
+        height: 25px;
+        stroke-width: 10px;
+    }
+`
+
+export const GridColumnText = styled.span`
+    ${SetFont({
+        size: TextSize.body,
+        color: Color.greyText,
+        weight: TextWeight.regular,
+    })}
+    &.bold {
+        ${SetFont({
+            size: TextSize.body,
+            color: Color.dark.primary,
+            weight: TextWeight.bold,
+        })}
+
+    }
+    &.medium {
+        ${SetFont({
+            size: TextSize.body,
+            color: Color.dark.primary,
+            weight: TextWeight.medium,
+        })}
+
+    }
+    &.primary {
+        ${SetFont({
+            size: TextSize.bodySm,
+            color: Color.primary,
+            weight: TextWeight.medium,
+        })}
+    }
+`
+
+export const DescHeading = styled.h2`
+    ${SetFont({
+        size: TextSize.body,
+        color: Color.dark.primary,
+        weight: TextWeight.bold,
+    })}
+    margin: ${({ nomargin }) => nomargin ? '0 20px' : '10px 20px'};
+`
+
+export const DescBody = styled(DescHeading)`
+    font-weight: ${TextWeight.medium};
+    
+`
+
+export const Hr = styled.hr`
+    margin: 20px;
 `

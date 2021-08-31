@@ -24,13 +24,22 @@ import {
     DesktopViewCopy,
     BodyDesktop,
     DesktopButtonCatch,
+    TextColumnThree,
+    TextColumnThreeSpan,
+    GridTwoColumn,
+    GridColumnText,
+    GridThreeColumn,
+    DescHeading,
+    DescBody,
+    Hr,
 } from './PokemonDetailStyle';
 import { SwiperSlide } from 'swiper/react';
 import useGetHistory from '../../hooks/useGetHistory';
 import { useState } from 'react';
 import { getThemePokemonImage } from '../../helpers/Util';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import useIsMobile from '../../hooks/useIsMobile';
+import { IoMdMale, IoMdFemale } from 'react-icons/io';
 
 function PokemonDetail(props) {
     const [page, setPage] = useState('general')
@@ -244,7 +253,7 @@ function PokemonDetail(props) {
                     <span className='id'>#111</span>
 
                     <DesktopButtonCatch>
-                        
+
                     </DesktopButtonCatch>
                 </DesktopViewPokemon>
                 <DesktopViewDetail>
@@ -297,6 +306,53 @@ function PokemonDetail(props) {
                                 </div>
                             </div>
                         </DesktopViewCopy>
+
+                        <TextColumnThree>
+                            <div>
+                                <TextColumnThreeSpan >Weight</TextColumnThreeSpan>
+                                <TextColumnThreeSpan >
+                                    2.44
+                                </TextColumnThreeSpan>
+                            </div>
+                            <div>
+                                <TextColumnThreeSpan >Height</TextColumnThreeSpan>
+                                <TextColumnThreeSpan >
+                                    2.44
+                                </TextColumnThreeSpan>
+                            </div>
+                            <div>
+                                <TextColumnThreeSpan >Base Exp</TextColumnThreeSpan>
+                                <TextColumnThreeSpan >
+                                    2.44
+                                </TextColumnThreeSpan>
+                            </div>
+                        </TextColumnThree>
+
+
+                        <GridThreeColumn>
+                            <GridColumnText>Gender</GridColumnText>
+                            <GridColumnText><IoMdMale /></GridColumnText>
+                            <GridColumnText><IoMdFemale /></GridColumnText>
+                        </GridThreeColumn>
+
+                        <GridTwoColumn>
+                            <GridColumnText>Base Happiness</GridColumnText>
+                            <GridColumnText className='bold'>70</GridColumnText>
+                            <GridColumnText>Capture Rate</GridColumnText>
+                            <GridColumnText className='bold'>45</GridColumnText>
+                            <GridColumnText>Habitat</GridColumnText>
+                            <GridColumnText className='bold'>Grassland</GridColumnText>
+                        </GridTwoColumn>
+
+                        <DescHeading nomargin> Abilities </DescHeading>
+                        <Hr />
+                        <DescBody> 
+                            Anim officia culpa consectetur ea ipsum nulla esse ut aute aute Lorem sunt minim.
+                        </DescBody>
+
+
+                        
+
                     </BodyDesktop>
 
                     <BodyDesktop isactive={page === 'evolutions'}>
