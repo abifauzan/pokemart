@@ -27,6 +27,7 @@ export const GlobalStyles = createGlobalStyle`
         border:0;
         outline:0;
         font-size:100%;
+        font-family: 'Montserrat', 'sans-serif';
         vertical-align:baseline;
         background:transparent;
     }

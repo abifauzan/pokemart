@@ -5,6 +5,7 @@ import { SetFont, SetGradient, TextSize, TextWeight } from '../../configs/Mixin'
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
+import { motion } from 'framer-motion';
 
 export const Wrapper = styled.section`
     display: flex;
@@ -67,7 +68,7 @@ export const MobileView = styled(Swiper)`
     }
 `
 
-export const Item = styled.div`
+export const Item = styled(motion.div)`
     width: 150px;
     /* height: 200px; */
     display: flex;
@@ -141,7 +142,7 @@ export const DesktopView = styled.div`
     }
 `
 
-export const ItemDesktopFirst = styled.div`
+export const ItemDesktopFirst = styled(motion.div)`
     padding: 20px;
     background: ${SetGradient('fire', 270).background};
     position: relative;
@@ -214,7 +215,7 @@ export const ItemDesktopFirst = styled.div`
     }
 `
 
-export const ItemDesktop = styled.div`
+export const ItemDesktop = styled(motion.div)`
     padding: 20px;
     display: flex;
     flex-direction: column;

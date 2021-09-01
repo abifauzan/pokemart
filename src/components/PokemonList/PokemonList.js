@@ -1,7 +1,9 @@
 import React from 'react';
-import { Heading, List, Wrapper } from './PokemonListStyle';
+import { Heading, List, LoadingArea, Wrapper } from './PokemonListStyle';
 import { BiRefresh } from 'react-icons/bi'
 import PokemonItem from './PokemonItem';
+import SkeletonBox from '../SkeletonBox/SkeletonBox';
+import LoadingBar from '../LoadingBar';
 
 function PokemonList(props) {
     return (
@@ -12,6 +14,7 @@ function PokemonList(props) {
             </Heading>
 
             <List>
+                <SkeletonBox mode='all' />
                 <PokemonItem />
                 <PokemonItem />
                 <PokemonItem />
@@ -41,6 +44,10 @@ function PokemonList(props) {
                 <PokemonItem />
                 <PokemonItem />
             </List>
+        
+            <LoadingArea>
+                <LoadingBar />
+            </LoadingArea>
         </Wrapper>
     );
 }

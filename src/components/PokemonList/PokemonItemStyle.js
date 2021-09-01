@@ -3,10 +3,24 @@ import { Link } from 'react-router-dom';
 import Color from '../../configs/Color';
 import { TextSize, TextWeight, SetFont } from '../../configs/Mixin';
 import Media from "../../configs/Media";
+import { motion } from 'framer-motion';
+
+export const Container = styled(motion.div)`
+    width: 100%;
+    height: 105px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 20px;
+
+    ${Media.tab`
+        height: 150px;
+    `}
+`
 
 export const Item = styled(Link)`
     width: 100%;
-    height: 105px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;

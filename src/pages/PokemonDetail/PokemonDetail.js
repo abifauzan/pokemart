@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
     Body, 
     ButtonCatch, 
@@ -44,9 +44,37 @@ import { IoMdMale, IoMdFemale } from 'react-icons/io';
 
 function PokemonDetail(props) {
     const [page, setPage] = useState('general')
+    const [mounted, setMounted] = useState(false)
 
     const { pathname } = useGetHistory()
     const isMobile = useIsMobile()
+
+    useEffect(() => {
+        // setTimeout(() => {
+        //     setMounted(true)
+        // }, 2000);
+        setMounted(true)
+    }, [])
+
+    // Animation
+
+    const variants = {
+        mobile: {
+            open: { opacity: 1, y: 0},
+            close: { opacity: 0, y: '100%'}
+        },
+        desktop: {
+            left: {
+                open: { opacity: 1, x: 0 },
+                close: { opacity: 0, x: '-100%' }
+            },
+            right: {
+                open: { opacity: 1, x: 0 },
+                close: { opacity: 0, x: '100%' }
+            }
+            
+        }
+    }
     
     const mobileView = (
         <Container>
@@ -72,7 +100,11 @@ function PokemonDetail(props) {
                 <SwiperSlide></SwiperSlide>
             </Menu>
 
-            <Body isactive={page==='general'}>
+            <Body 
+                isactive={page==='general'}
+                animate={page==='general' && mounted ? 'open' : 'close'}
+                variants={variants.mobile}
+            >
                 <PokemonTitle>Bulbasaur</PokemonTitle>
                 <TypeContainer>
                     <div className='type'>
@@ -160,7 +192,11 @@ function PokemonDetail(props) {
             
             </Body>
 
-            <Body isactive={page==='evolutions'}>
+            <Body 
+                isactive={page==='evolutions'}
+                animate={page==='evolutions' ? 'open' : 'close'}
+                variants={variants.mobile}
+            >
                 <List>
                     <ListItem>
                         <ItemPokemon 
@@ -254,7 +290,10 @@ function PokemonDetail(props) {
 
     const desktopView = (
         <Container>
-            <DesktopView>
+            <DesktopView
+                initial={{ opacity: 0, y: '100%' }}
+                animate={{ opacity: 1, y: 0 }}
+            >
                 <DesktopViewPokemon>
                     <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='pokemon' />
                     <span className='id'>#111</span>
@@ -286,7 +325,11 @@ function PokemonDetail(props) {
                         <SwiperSlide></SwiperSlide>
                     </Menu>
 
-                    <BodyDesktop isactive={page === 'general'}>
+                    <BodyDesktop 
+                        isactive={page === 'general'}
+                        animate={page === 'general' ? 'open': 'close'}
+                        variants={variants.desktop.left}
+                    >
                         <DesktopViewCopy>
                             <h2>Bulbasaur</h2>
                             <TypeContainer>
@@ -385,7 +428,11 @@ function PokemonDetail(props) {
 
                     </BodyDesktop>
 
-                    <BodyDesktop isactive={page === 'evolutions'}>
+                    <BodyDesktop 
+                        isactive={page === 'evolutions'}
+                        animate={page === 'evolutions' ? 'open': 'close'}
+                        variants={variants.desktop.right}
+                    >
                         <List>
                             <ListItem>
                                 <ItemPokemon 
@@ -533,6 +580,7 @@ function PokemonDetail(props) {
             </DesktopView>
         </Container>
     )
+
     return isMobile ? mobileView : desktopView
 }
 

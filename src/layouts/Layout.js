@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Media, { sizes } from '../configs/Media';
 import Header from './Header/Header';
@@ -6,6 +6,8 @@ import MenuMobile from './MenuMobile/MenuMobile';
 import useIsMobile from '../hooks/useIsMobile'
 import Color from '../configs/Color';
 import useGetHistory from '../hooks/useGetHistory';
+import LoadingPage from '../components/LoadingPage';
+import { useState } from 'react';
 
 const MainLayout = styled.main`
     width: 100%;
@@ -62,14 +64,19 @@ const ContentBlur = styled.div`
 `
 
 function Layout({ children }) {
+    const [mounted, setMounted] = useState(false)
 
     const isMobile = useIsMobile()
     const { pathname } = useGetHistory()
     const pokemonDetailPage = pathname.split('/')[1] === 'pokemon'
 
-    console.log(pokemonDetailPage);
+    useEffect(() => {
+        setTimeout(() => {
+            setMounted(true)
+        }, 1000);
+    }, [])
 
-    return (
+    return mounted ? (
         <MainLayout>
             <MainContainer>
                 <Header />
@@ -84,7 +91,7 @@ function Layout({ children }) {
             )}
             
         </MainLayout>
-    );
+    ) : <LoadingPage />
 }
 
 export default Layout;

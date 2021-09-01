@@ -3,6 +3,7 @@ import Color from '../../configs/Color';
 import { SetFont, SetGradient, TextSize, TextWeight } from '../../configs/Mixin';
 import { Swiper } from 'swiper/react';
 import Media from '../../configs/Media';
+import { motion } from 'framer-motion';
 
 export const Container = styled.section`
     padding: 16px 0 0;
@@ -44,7 +45,11 @@ export const Item = styled.button`
     white-space: nowrap;
 `
 
-export const Body = styled.div`
+export const Body = styled(motion.div)`
+
+
+
+
     margin: 16px;
     border-radius: 20px;
     min-height: 50vh;
@@ -271,9 +276,10 @@ export const MovesItemText = styled.span`
 
 // Desktop Style
 
-export const DesktopView = styled.section`
+export const DesktopView = styled(motion.section)`
     width: 100%;
-    height: calc(100vh - 210px);
+    /* height: calc(100vh - 210px); */
+    max-height: 700px;
     background: ${SetGradient('electric', 33).background};
     border-radius: 20px;
     margin-top: 30px;
@@ -324,13 +330,14 @@ export const DesktopButtonCatch = styled.button`
 export const DesktopViewDetail = styled.div`
     /* flex: 1; */
     width: calc(50% - 40px);
-    height: 100%;
+    max-height: calc(700px - 60px);
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     background: ${Color.white};
     position: relative;
     border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     height: calc(105% - 40px);
@@ -395,7 +402,7 @@ export const TypeContainer = styled.div`
     }
 `
 
-export const BodyDesktop = styled.div`
+export const BodyDesktop = styled(motion.div)`
     width: 100%;
     height: 100%;
     display: ${({ isactive }) => isactive ? 'flex' : 'none'};

@@ -7,9 +7,10 @@ export const Wrapper = styled.section`
     padding: 0 16px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     ${Media.tab`
-        padding: 0 30px;
+        padding: 0 30px 60px;
     `}
 `
 
@@ -48,4 +49,8 @@ export const List = styled.div`
         column-gap: 30px;
         row-gap: 60px;
     `}
+`
+
+export const LoadingArea = styled.div`
+    margin: 40px 0 0;
 `

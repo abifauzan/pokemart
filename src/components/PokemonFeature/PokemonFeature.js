@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     Wrapper, 
     Heading, 
@@ -13,13 +13,33 @@ import { BiRefresh } from 'react-icons/bi'
 import { SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination, Navigation } from 'swiper';
 import useIsMobile from '../../hooks/useIsMobile';
+import SkeletonBox from '../SkeletonBox/SkeletonBox';
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
 function PokemonFeature(props) {
+    const [mounted, setMounted] = useState(false)
 
     const isMobile = useIsMobile()
+
+    const variants = {
+        desktop: {
+            open: { opacity: 1, y: 0 },
+            close: { opacity: 0, y: '100px' }
+        },
+        mobile: {
+            open: { opacity: 1, x: 0 },
+            close: { opacity: 0, x: '-100px' }
+        }
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setMounted(true)
+        }, 2000);
+        // setMounted(true)
+    }, [])
 
     const mobileView = (
         <MobileView
@@ -32,7 +52,15 @@ function PokemonFeature(props) {
             className='mySwiper'
         >
             <SwiperSlide>
-                <Item>
+                <SkeletonBox mode='feature' />
+
+            </SwiperSlide>
+            <SwiperSlide>
+                <Item
+                    animate={mounted ? 'open' : 'close' }
+                    initial='close'
+                    variants={variants.mobile}
+                >
                     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`} alt='image' />
 
                     <ItemDesc>
@@ -42,7 +70,11 @@ function PokemonFeature(props) {
                 </Item>
             </SwiperSlide>
             <SwiperSlide>
-                <Item>
+                <Item
+                    animate={mounted ? 'open' : 'close' }
+                    initial='close'
+                    variants={variants.mobile}
+                >
                     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`} alt='image' />
 
                     <ItemDesc>
@@ -52,28 +84,12 @@ function PokemonFeature(props) {
                 </Item>
             </SwiperSlide>
             <SwiperSlide>
-                <Item>
-                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`} />
-
-                    <ItemDesc>
-                        <p>Charmander</p>
-                        <span>#12</span>
-                    </ItemDesc>
-                </Item>
-            </SwiperSlide>
-            <SwiperSlide>
-                <Item>
-                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`} />
-
-                    <ItemDesc>
-                        <p>Charmander</p>
-                        <span>#12</span>
-                    </ItemDesc>
-                </Item>
-            </SwiperSlide>
-            <SwiperSlide>
-                <Item>
-                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`} />
+                <Item
+                    animate={mounted ? 'open' : 'close' }
+                    initial='close'
+                    variants={variants.mobile}
+                >
+                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`} alt='image' />
 
                     <ItemDesc>
                         <p>Charmander</p>
@@ -89,7 +105,11 @@ function PokemonFeature(props) {
 
     const desktopView = (
         <DesktopView>
-            <ItemDesktopFirst>
+            <ItemDesktopFirst
+                animate={mounted ? 'open' : 'close' }
+                initial='close'
+                variants={variants.desktop}
+            >
                 <h2>Mega Heracross</h2>
                 <span className='subheading'>Genetic Pokemon</span>
                 <div className='type'>
@@ -99,7 +119,13 @@ function PokemonFeature(props) {
                 <span className='id'>#11</span>
                 <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png'} alt='' />
             </ItemDesktopFirst>
-            <ItemDesktop>
+            <SkeletonBox mode='feature' />
+            
+            <ItemDesktop
+                animate={mounted ? 'open' : 'close' }
+                initial='close'
+                variants={variants.desktop}
+            >
                 <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='image' />
                 <span className='title'>Mega Mewtwo X</span>
                 <span className='subtitle'>Genetic Pokemon</span>
