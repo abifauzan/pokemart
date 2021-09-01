@@ -2,9 +2,7 @@ import React, { useEffect } from 'react'
 import { useHistory, useLocation } from "react-router-dom";
 import { BiHomeAlt } from 'react-icons/bi'
 import { AiOutlineUser } from 'react-icons/ai'
-import { CgPokemon } from 'react-icons/cg'
 import {
-    ItemPokemon,
     Item,
     Nav,
 } from './MenuMobileStyle'
@@ -26,9 +24,6 @@ function MenuMobile(props) {
             >
                 <AiOutlineUser />
             </Item>
-            <ItemPokemon>
-                <CgPokemon />
-            </ItemPokemon>
         </Nav>
     );
 }

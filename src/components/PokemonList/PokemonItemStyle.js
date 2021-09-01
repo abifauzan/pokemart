@@ -24,7 +24,7 @@ export const Item = styled(Link)`
     display: flex;
     flex-direction: column;
     position: relative;
-    background: ${Color.water.light};
+    background: ${props => props.pokemontheme.color.light};
     border-radius: 20px;
     justify-content: flex-end;
 
@@ -52,7 +52,7 @@ export const ItemDesc = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background: ${Color.water.primary};
+    background: ${props => props.pokemontheme.color.primary};
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 20px;

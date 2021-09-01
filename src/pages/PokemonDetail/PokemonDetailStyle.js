@@ -46,10 +46,6 @@ export const Item = styled.button`
 `
 
 export const Body = styled(motion.div)`
-
-
-
-
     margin: 16px;
     border-radius: 20px;
     min-height: 50vh;
@@ -58,8 +54,8 @@ export const Body = styled(motion.div)`
     align-items: center;
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(100px) saturate(100%);
-    background-color: rgba(255, 255, 255, 0.23);
+    /* backdrop-filter: blur(100px) saturate(10%); */
+    background-color: rgba(255, 255, 255, 0.5);
     /* box-shadow: 5px 5px 10px #e0e0e0,
         -5px -5px 10px #ffffff; */
         box-shadow: 6px -1px 30px -26px rgba(0,0,0,0.4);

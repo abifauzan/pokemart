@@ -20,6 +20,7 @@ SwiperCore.use([Pagination, Navigation]);
 
 function PokemonFeature(props) {
     const [mounted, setMounted] = useState(false)
+    const [spin, setSpin] = useState(false)
 
     const isMobile = useIsMobile()
 
@@ -176,11 +177,20 @@ function PokemonFeature(props) {
         </DesktopView>
         
     )
+
     return (
         <Wrapper>
             <Heading>
                 <h2>Wild Pokemon</h2>
-                <BiRefresh />
+                <BiRefresh 
+                    onClick={() => {
+                        setSpin(true)
+                        setTimeout(() => {
+                            setSpin(false)
+                        }, 5000);
+                    }}
+                    className={spin ? 'icon rotate' : 'icon'}
+                />
             </Heading>
 
             {isMobile ? mobileView : desktopView}

@@ -96,14 +96,14 @@ export const Item = styled(Link)`
         /* margin-left: unset; */
     }
 
-    &:last-child {
+    /* &:last-child {
         padding: unset;
         margin: unset;
 
         &::after {
             display: none;
         }
-    }
+    } */
 `
 
 export const SearchBoxMobile = styled.div`

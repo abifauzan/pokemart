@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Color from '../../configs/Color';
 import Media from "../../configs/Media";
 import { SetFont, SetGradient, TextSize, TextWeight } from '../../configs/Mixin';
+import { motion } from 'framer-motion';
 
 export const Wrapper = styled.section`
     display: flex;
@@ -55,7 +56,7 @@ export const ItemList = styled.div`
     `}
 `
 
-export const Item = styled.div`
+export const Item = styled(motion.div)`
     padding: 20px;
     display: flex;
     flex-direction: column;

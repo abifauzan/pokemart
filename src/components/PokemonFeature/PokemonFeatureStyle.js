@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Color from '../../configs/Color';
 import Media from "../../configs/Media";
 import { SetFont, SetGradient, TextSize, TextWeight } from '../../configs/Mixin';
@@ -18,7 +18,16 @@ export const Wrapper = styled.section`
     `}
 `
 
-export const Heading = styled.div`
+const spin = keyframes`
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+`
+
+export const Heading = styled(motion.div)`
     /* width: 100%; */
     display: flex;
     justify-content: space-between;
@@ -41,6 +50,10 @@ export const Heading = styled.div`
         width: 30px;
         height: 30px;
         color: ${Color.dark.primary};
+
+        &.rotate {
+            animation: 1s ${spin} linear infinite;
+        }
     }
 `
 

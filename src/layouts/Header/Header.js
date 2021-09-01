@@ -15,11 +15,11 @@ import useGetHistory from '../../hooks/useGetHistory';
 
 function Header(props) {
 
-    const { pathname } = useGetHistory()
+    const { pathname, history } = useGetHistory()
     const isMobile = useIsMobile()
 
     const logo = (
-        <img src={pokemon_logo} alt='Pokemon Logo' />
+        <img src={pokemon_logo} alt='Pokemon Logo' onClick={() => history.push('/')} />
     )
 
     const searchBox = (
@@ -37,13 +37,12 @@ function Header(props) {
                 <div />
                     {logo}
                 <div />
-                
             </HeaderTop>
-            {isMobile && searchBox}
+            {/* {isMobile && searchBox} */}
         </>
     ) : (
         <HeaderTop>
-            <IoChevronBackOutline />
+            <IoChevronBackOutline onClick={() => history.goBack()} />
             {logo}
             <div />
         </HeaderTop>
@@ -62,12 +61,6 @@ function Header(props) {
                 isactive={pathname === '/my-pokemon' ? 1 : undefined}
             >
                 My Pokemon
-            </Item>
-            <Item 
-                to='/'
-                isactive={pathname === '/catch' ? 1 : undefined}
-            >
-                Capture
             </Item>
         </NavDesktop>
     )

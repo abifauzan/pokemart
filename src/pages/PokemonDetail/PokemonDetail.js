@@ -37,7 +37,7 @@ import {
 import { SwiperSlide } from 'swiper/react';
 import useGetHistory from '../../hooks/useGetHistory';
 import { useState } from 'react';
-import { getThemePokemonImage } from '../../helpers/Util';
+import { getThemePokemonImage, scrollToTop } from '../../helpers/Util';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import useIsMobile from '../../hooks/useIsMobile';
 import { IoMdMale, IoMdFemale } from 'react-icons/io';
@@ -54,25 +54,19 @@ function PokemonDetail(props) {
         //     setMounted(true)
         // }, 2000);
         setMounted(true)
+        scrollToTop()
     }, [])
 
     // Animation
 
     const variants = {
-        mobile: {
-            open: { opacity: 1, y: 0},
-            close: { opacity: 0, y: '100%'}
+        left: {
+            open: { opacity: 1, x: 0 },
+            close: { opacity: 0, x: '-100%' }
         },
-        desktop: {
-            left: {
-                open: { opacity: 1, x: 0 },
-                close: { opacity: 0, x: '-100%' }
-            },
-            right: {
-                open: { opacity: 1, x: 0 },
-                close: { opacity: 0, x: '100%' }
-            }
-            
+        right: {
+            open: { opacity: 1, x: 0 },
+            close: { opacity: 0, x: '100%' }
         }
     }
     
@@ -103,7 +97,7 @@ function PokemonDetail(props) {
             <Body 
                 isactive={page==='general'}
                 animate={page==='general' && mounted ? 'open' : 'close'}
-                variants={variants.mobile}
+                variants={variants.left}
             >
                 <PokemonTitle>Bulbasaur</PokemonTitle>
                 <TypeContainer>
@@ -195,7 +189,7 @@ function PokemonDetail(props) {
             <Body 
                 isactive={page==='evolutions'}
                 animate={page==='evolutions' ? 'open' : 'close'}
-                variants={variants.mobile}
+                variants={variants.right}
             >
                 <List>
                     <ListItem>
@@ -328,7 +322,7 @@ function PokemonDetail(props) {
                     <BodyDesktop 
                         isactive={page === 'general'}
                         animate={page === 'general' ? 'open': 'close'}
-                        variants={variants.desktop.left}
+                        variants={variants.left}
                     >
                         <DesktopViewCopy>
                             <h2>Bulbasaur</h2>
@@ -431,7 +425,7 @@ function PokemonDetail(props) {
                     <BodyDesktop 
                         isactive={page === 'evolutions'}
                         animate={page === 'evolutions' ? 'open': 'close'}
-                        variants={variants.desktop.right}
+                        variants={variants.right}
                     >
                         <List>
                             <ListItem>

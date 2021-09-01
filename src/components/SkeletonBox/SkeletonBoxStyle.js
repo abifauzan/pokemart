@@ -21,7 +21,36 @@ export const BoxFeature = styled.div`
 
     ${Media.tab`
         width: auto;
+        height: 100%;
+    `}
+`
+
+export const BoxCollection = styled.div`
+    width: auto;
+    height: 253px;
+    border-radius: 20px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ${Media.tab`
+        width: 200px;
         height: auto;
+    `}
+`
+
+export const BoxPokemon = styled.div`
+    width: auto;
+    height: 105px;
+    border-radius: 20px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ${Media.tab`
+        height: 150px;
     `}
 `
 
@@ -33,9 +62,4 @@ export const BoxAll = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* ${Media.tab`
-        width: auto;
-        height: auto;
-    `} */
 `

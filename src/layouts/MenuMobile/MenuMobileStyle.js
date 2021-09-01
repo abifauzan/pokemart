@@ -23,25 +23,22 @@ export const Item = styled(Link)`
     align-items: center;
     flex: 1;
     color: ${({ isactive }) => isactive ? Color.dark.light : Color.greyText};
+    position: relative;
+    bottom: 5px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        width: 25px;
+        height: 3px;
+        background: ${({ isactive }) => isactive ? Color.grass.light : 'transparent'};
+    }
 
     svg {
         width: 27px;
         height: 27px;
-        background: ${({ isactive }) => isactive ? Color.grass.light : 'transparent'};
         padding: 7px;
         border-radius: 9999px;
-    }
-`
-
-export const ItemPokemon = styled.button`
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: ${Color.primary};
-
-    svg {
-        width: 60px;
-        height: 60px;
     }
 `

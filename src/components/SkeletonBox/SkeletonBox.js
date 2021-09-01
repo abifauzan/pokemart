@@ -1,6 +1,6 @@
 import React from 'react';
 import LoadingBar from '../LoadingBar';
-import { BoxDefault, BoxFeature, BoxAll } from './SkeletonBoxStyle';
+import { BoxDefault, BoxFeature, BoxAll, BoxCollection, BoxPokemon } from './SkeletonBoxStyle';
 
 function SkeletonBox({ mode }) {
 
@@ -9,10 +9,12 @@ function SkeletonBox({ mode }) {
 
             case 'feature':
                 return <BoxFeature><LoadingBar /></BoxFeature>
-            case 'all':
-                return <BoxAll><LoadingBar /></BoxAll>
+            case 'collection':
+                return <BoxCollection><LoadingBar /></BoxCollection>
+            case 'pokemon':
+                return <BoxPokemon><LoadingBar /></BoxPokemon>
             default:
-                return <BoxDefault />
+                return <BoxAll><LoadingBar /></BoxAll>
         }
     }
 
