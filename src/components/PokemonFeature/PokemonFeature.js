@@ -8,12 +8,20 @@ import {
     ItemDesktop, 
     DesktopView,
     ItemDesktopFirst,
+    SpanDesktopOne,
+    SpanDesktopTwo,
 } from './PokemonFeatureStyle';
 import { BiRefresh } from 'react-icons/bi'
 import { SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination, Navigation } from 'swiper';
 import useIsMobile from '../../hooks/useIsMobile';
 import SkeletonBox from '../SkeletonBox/SkeletonBox';
+import useFetchWild from '../../hooks/useFetchWild';
+import usePokemonTheme from '../../hooks/usePokemonTheme';
+import {
+    getThemePokemon
+} from '../../helpers/Util'
+import useGetHistory from '../../hooks/useGetHistory';
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
@@ -22,6 +30,15 @@ function PokemonFeature(props) {
     const [mounted, setMounted] = useState(false)
     const [spin, setSpin] = useState(false)
 
+    const { history } = useGetHistory()
+
+    const {
+        data
+    } = useFetchWild()
+
+    // const pokemonTheme = usePokemonTheme(data)
+
+    // console.log(pokemonTheme);
     const isMobile = useIsMobile()
 
     const variants = {
@@ -36,13 +53,14 @@ function PokemonFeature(props) {
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            setMounted(true)
-        }, 2000);
-        // setMounted(true)
-    }, [])
+        data.length === 5 && setMounted(true)
+    }, [data])
 
-    const mobileView = (
+    const mobileView = () => {
+        const pokemonType = Object.keys(data).length > 0 && getThemePokemon(data[0].types[0].type.name)
+
+        
+        return (
         <MobileView
             slidesPerView='auto'
             spaceBetween={20}
@@ -52,136 +70,117 @@ function PokemonFeature(props) {
             centeredSlides={false}
             className='mySwiper'
         >
-            <SwiperSlide>
-                <SkeletonBox mode='feature' />
+            { mounted ? data.map((el, idx) => {
+                const pokemonType = getThemePokemon(el.types[0].type.name)
 
-            </SwiperSlide>
-            <SwiperSlide>
-                <Item
-                    animate={mounted ? 'open' : 'close' }
-                    initial='close'
-                    variants={variants.mobile}
-                >
-                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`} alt='image' />
+                return (
+                    <SwiperSlide key={el.id}>
+                        <Item
+                            animate={mounted ? 'open' : 'close' }
+                            initial='close'
+                            variants={variants.mobile}
+                            pokemontype={pokemonType}
+                            onClick={() => history.push(`/pokemon/${el.name}`)}
+                        >
+                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${el.id}.png`} alt={el.name} />
 
-                    <ItemDesc>
-                        <p>Charmander</p>
-                        <span>#12</span>
-                    </ItemDesc>
-                </Item>
-            </SwiperSlide>
-            <SwiperSlide>
-                <Item
-                    animate={mounted ? 'open' : 'close' }
-                    initial='close'
-                    variants={variants.mobile}
-                >
-                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`} alt='image' />
-
-                    <ItemDesc>
-                        <p>Charmander</p>
-                        <span>#12</span>
-                    </ItemDesc>
-                </Item>
-            </SwiperSlide>
-            <SwiperSlide>
-                <Item
-                    animate={mounted ? 'open' : 'close' }
-                    initial='close'
-                    variants={variants.mobile}
-                >
-                    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png`} alt='image' />
-
-                    <ItemDesc>
-                        <p>Charmander</p>
-                        <span>#12</span>
-                    </ItemDesc>
-                </Item>
-            </SwiperSlide>
+                            <ItemDesc
+                                pokemontype={pokemonType}
+                            >
+                                <p>{el.name.replaceAll('-', ' ')}</p>
+                                <span>#{el.id}</span>
+                            </ItemDesc>
+                        </Item>
+                    </SwiperSlide>
+                )
+            }) : (
+                <SwiperSlide>
+                    <SkeletonBox mode='feature' />
+                </SwiperSlide>
+            )}
+            
             <SwiperSlide></SwiperSlide>
             <SwiperSlide></SwiperSlide>
             
         </MobileView>
-    )
+    ) }
 
-    const desktopView = (
-        <DesktopView>
-            <ItemDesktopFirst
-                animate={mounted ? 'open' : 'close' }
-                initial='close'
-                variants={variants.desktop}
-            >
-                <h2>Mega Heracross</h2>
-                <span className='subheading'>Genetic Pokemon</span>
-                <div className='type'>
-                    <span>Fire</span>
-                    <span>Grass</span>
-                </div>
-                <span className='id'>#11</span>
-                <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png'} alt='' />
-            </ItemDesktopFirst>
-            <SkeletonBox mode='feature' />
+    const desktopView = () => {
+        const pokemonType0 = Object.keys(data).length > 0 && getThemePokemon(data[0].types[0].type.name)
+
+        return (
+            <DesktopView>
+                {mounted ? (
+                    <ItemDesktopFirst
+                        animate={mounted ? 'open' : 'close' }
+                        initial='close'
+                        variants={variants.desktop}
+                        pokemontype={pokemonType0}
+                        onClick={() => history.push(`/pokemon/${data[0].name}`)}
+                    >
+                        <h2>{data[0].name.replaceAll('-', ' ')}</h2>
+                        <span className='subheading'>Genetic Pokemon</span>
+                        <div className='type'>
+                            {data[0].types.map(el => (
+                                <SpanDesktopOne 
+                                    key={el.type.name}
+                                    type={getThemePokemon(el.type.name)}
+                                >{el.type.name}</SpanDesktopOne>
+                            ))}
+                        </div>
+                        <span className='id'>#{data[0].id}</span>
+                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data[0].id}.png`} alt={data[0].name} />
+                    </ItemDesktopFirst>
+                ) : (
+                    <SkeletonBox mode='feature' />
+                )}
+
+                {mounted ? Array(4).fill(1).map((el, idx) => {
+                    let index = el + idx
+
+                    return (
+                        <ItemDesktop
+                            key={data[index].id}
+                            animate={mounted ? 'open' : 'close' }
+                            initial='close'
+                            variants={variants.desktop}
+                            onClick={() => history.push(`/pokemon/${data[index].name}`)}
+                        >
+                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data[index].id}.png`} alt={data[index].name} />
+                            
+                            <span className='title'>{data[index].name.replaceAll('-', ' ')}</span>
+                            <span className='subtitle'>Genetic Pokemon</span>
             
-            <ItemDesktop
-                animate={mounted ? 'open' : 'close' }
-                initial='close'
-                variants={variants.desktop}
-            >
-                <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='image' />
-                <span className='title'>Mega Mewtwo X</span>
-                <span className='subtitle'>Genetic Pokemon</span>
-
-                <div className='type'>
-                    <span>Fighting</span>
-                    <div className='dot' />
-                    <span>Psychic</span>
-                </div>
-                <span className='id'>#11</span>
-            </ItemDesktop>
-            <ItemDesktop>
-                <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='image' />
-                <span className='title'>Mega Mewtwo X</span>
-                <span className='subtitle'>Genetic Pokemon</span>
-
-                <div className='type'>
-                    <span>Fighting</span>
-                    <div className='dot' />
-                    <span>Psychic</span>
-                </div>
-                <span className='id'>#11</span>
-            </ItemDesktop>
-            <ItemDesktop>
-                <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='image' />
-                <span className='title'>Mega Mewtwo X</span>
-                <span className='subtitle'>Genetic Pokemon</span>
-
-                <div className='type'>
-                    <span>Fighting</span>
-                    <div className='dot' />
-                    <span>Psychic</span>
-                </div>
-                <span className='id'>#11</span>
-            </ItemDesktop>
-            <ItemDesktop>
-                <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='image' />
-                <span className='title'>Mega Mewtwo X</span>
-                <span className='subtitle'>Genetic Pokemon</span>
-
-                <div className='type'>
-                    <span>Fighting</span>
-                    <div className='dot' />
-                    <span>Psychic</span>
-                </div>
-                <span className='id'>#11</span>
-            </ItemDesktop>
-        </DesktopView>
-        
-    )
+                            <div className='type'>
+                                <SpanDesktopTwo
+                                    type={getThemePokemon(data[index].types[0].type.name)}
+                                >
+                                    {data[index].types[0].type.name}
+                                </SpanDesktopTwo>
+                                {data[index].types.length > 1 && (
+                                    <>
+                                    <div className='dot' />
+                                    <SpanDesktopTwo
+                                        type={getThemePokemon(data[index].types[1].type.name)}
+                                    >{data[index].types[1].type.name}</SpanDesktopTwo>    
+                                    </>
+                                )}
+                                
+                            </div>
+                            <span className='id'>#{data[index].id}</span>
+                        </ItemDesktop>
+                    )
+                }) : <SkeletonBox mode='feature' /> }
+                
+            </DesktopView>
+            
+        )
+    }
 
     return (
         <Wrapper>
             <Heading>
-                <h2>Wild Pokemon</h2>
+                <h2>Legendary Pokemon</h2>
                 <BiRefresh 
                     onClick={() => {
                         setSpin(true)
@@ -193,7 +192,7 @@ function PokemonFeature(props) {
                 />
             </Heading>
 
-            {isMobile ? mobileView : desktopView}
+            {isMobile ? mobileView() : desktopView()}
                 
         </Wrapper>
     );

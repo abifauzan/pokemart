@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import Color from '../../configs/Color';
 import Media from "../../configs/Media";
-import { SetFont, SetGradient, TextSize, TextWeight } from '../../configs/Mixin';
+import { SetFont, SetGradient, TextSize, TextWeight, GetColor } from '../../configs/Mixin';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
@@ -83,15 +83,16 @@ export const MobileView = styled(Swiper)`
 
 export const Item = styled(motion.div)`
     width: 150px;
-    /* height: 200px; */
+    height: 206px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-radius: 20px;
-    background: ${Color.fire.light};
+    background: ${props => GetColor(props.pokemontype).light};
 
     img {
-        width: 80%;
+        width: 120px;
+        height: 120px;
         flex-shrink: 0;
         margin: 10px 0;
         align-self: center;
@@ -100,26 +101,29 @@ export const Item = styled(motion.div)`
 
 export const ItemDesc = styled.div`
     padding: 15px 10px;
-    background: ${Color.fire.primary};
+    background: ${props => GetColor(props.pokemontype).primary};
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 
     p {
+        text-transform: capitalize;
         ${SetFont({ 
             size: TextSize.bodySm,
-            weight: TextWeight.medium,
+            weight: TextWeight.bold,
             color: Color.white
         })}
+        margin-bottom: 5px;
 
         ${Media.tab`
             ${SetFont({ 
                 size: TextSize.body,
-                weight: TextWeight.medium,
+                weight: TextWeight.bold,
                 color: Color.white
             })}
         `}
@@ -128,14 +132,14 @@ export const ItemDesc = styled.div`
     span {
         ${SetFont({ 
             size: TextSize.bodySm, 
-            weight: TextWeight.bold,
+            weight: TextWeight.medium,
             color: Color.white
         })}
 
         ${Media.tab`
             ${SetFont({ 
                 size: TextSize.body,
-                weight: TextWeight.bold,
+                weight: TextWeight.medium,
                 color: Color.white
             })}
         `}
@@ -157,7 +161,7 @@ export const DesktopView = styled.div`
 
 export const ItemDesktopFirst = styled(motion.div)`
     padding: 20px;
-    background: ${SetGradient('fire', 270).background};
+    background: ${props => SetGradient(props.pokemontype, 270).background};
     position: relative;
     overflow: hidden;
     display: flex;
@@ -171,6 +175,7 @@ export const ItemDesktopFirst = styled(motion.div)`
             weight: TextWeight.bold
         })}
         margin: 15px 15px 10px;
+        text-transform: capitalize;
     }
 
     span.subheading {
@@ -187,28 +192,6 @@ export const ItemDesktopFirst = styled(motion.div)`
         margin: 0 0 0 15px;
         /* align-items: flex-start; */
         /* flex-direction: column; */
-
-        span {
-            /* align-self: flex-start; */
-            padding: 5px 15px;
-            margin-right: 8px;
-            border-radius: 20px;
-            background: ${Color.white};
-            ${SetFont({
-                size: TextSize.bodySm,
-                color: Color.fire.primary,
-                weight: TextWeight.bold
-            })}
-
-            &:last-child {
-                ${SetFont({
-                    size: TextSize.bodySm,
-                    color: Color.grass.primary,
-                    weight: TextWeight.bold
-                })}
-                margin-right: unset;
-            }
-        }
     }
 
     span.id {
@@ -225,6 +208,41 @@ export const ItemDesktopFirst = styled(motion.div)`
         position: absolute;
         right: -40px;
         bottom: -50px;
+    }
+`
+
+export const SpanDesktopOne = styled.span`
+
+    padding: 5px 15px;
+    margin-right: 8px;
+    border-radius: 20px;
+    background: ${Color.white};
+    text-transform: capitalize;
+    ${SetFont({
+        size: TextSize.bodySm,
+        color: props => GetColor(props.type).primary,
+        weight: TextWeight.bold
+    })}
+
+    &:last-child {
+        margin-right: unset;
+    }
+`
+
+export const SpanDesktopTwo = styled.span`
+    ${SetFont({
+        size: TextSize.bodySm,
+        color: props => GetColor(props.type).primary,
+        weight: TextWeight.bold
+    })}
+    text-transform: uppercase;
+    margin-left: unset;
+    margin-right: 10px;
+    position: relative;
+
+    &:last-child {
+        margin-right: unset;
+        margin-left: 10px;
     }
 `
 
@@ -253,6 +271,7 @@ export const ItemDesktop = styled(motion.div)`
             weight: TextWeight.bold
         })}
         margin-bottom: 5px;
+        text-transform: capitalize;
     }
     span.subtitle {
         ${SetFont({
