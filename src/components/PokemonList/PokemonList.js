@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Heading, List, LoadingArea, Wrapper } from './PokemonListStyle';
-import { BiRefresh } from 'react-icons/bi'
 import PokemonItem from './PokemonItem';
-import SkeletonBox from '../SkeletonBox/SkeletonBox';
 import LoadingBar from '../LoadingBar';
-import InfiniteScroll from "react-infinite-scroll-component";
 import useFetch from '../../hooks/useFetch';
-import { checkObjectLength } from '../../helpers/Util';
 
 function PokemonList(props) {
-    const [spin, setSpin] = useState(false)
     const [isFetch, setIsFetch] = useState(true)
 
     const loadingArea = (

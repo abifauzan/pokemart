@@ -17,7 +17,6 @@ import SwiperCore, { Pagination, Navigation } from 'swiper';
 import useIsMobile from '../../hooks/useIsMobile';
 import SkeletonBox from '../SkeletonBox/SkeletonBox';
 import useFetchWild from '../../hooks/useFetchWild';
-import usePokemonTheme from '../../hooks/usePokemonTheme';
 import {
     getThemePokemon
 } from '../../helpers/Util'
@@ -58,9 +57,6 @@ function PokemonFeature(props) {
     }, [data])
 
     const mobileView = () => {
-        const pokemonType = Object.keys(data).length > 0 && getThemePokemon(data[0].types[0].type.name)
-
-        
         return (
         <MobileView
             slidesPerView='auto'

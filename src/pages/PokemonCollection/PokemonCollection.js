@@ -1,24 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { Heading, Item, ItemList, Wrapper } from './PokemonCollectionStyle';
 import useIsMobile from '../../hooks/useIsMobile';
-import SkeletonBox from '../../components/SkeletonBox/SkeletonBox';
+import useGlobalContext from '../../hooks/useGlobalContext';
+import useGetHistory from '../../hooks/useGetHistory';
+import WarningBox from '../../components/WarningBox';
 
 function PokemonCollection(props) {
 
     const [mounted, setMounted] = useState(false)
 
-    const isMobile = useIsMobile()
+    const { pokemonDeck, removePokemonFromDeck } = useGlobalContext()
+    const { history } = useGetHistory()
 
     const variants = {
         open: { opacity: 1, y: 0 },
         close: { opacity: 0, y: '100px' }
     }
 
+    const item = () => 
+        pokemonDeck.length && pokemonDeck.map((el, index) => {
+
+            return (
+                <Item
+                    key={el.id}
+                    animate={mounted ? 'open' : 'close' }
+                    initial='close'
+                    variants={variants}
+                >
+                    <img src={el.image} alt={`${el.name}-${el.nickname}`} />
+                    <span className='title'>{el.nickname.replaceAll('-', ' ')}</span>
+                    <span className='subtitle'>{el.name.replaceAll('-', ' ')}</span>
+
+                    <div className='type'>
+                        <span onClick={() => removePokemonFromDeck(el.nickname)}>Delete</span>
+                        <span onClick={() => history.push('/pokemon/'+el.name)}>Detail</span>
+                    </div>
+                </Item>
+            )
+        })
+
     useEffect(() => {
-        setTimeout(() => {
-            setMounted(true)
-        }, 2000);
-        // setMounted(true)
+        // setTimeout(() => {
+        //     setMounted(true)
+        // }, 2000);
+        setMounted(true)
     }, [])
     return (
         <Wrapper>
@@ -26,41 +51,7 @@ function PokemonCollection(props) {
                 <h2>My Pokemons</h2>
             </Heading>
             <ItemList>
-                <SkeletonBox mode='collection' />
-                <Item
-                    animate={mounted ? 'open' : 'close' }
-                    initial='close'
-                    variants={variants}
-                >
-                    <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='image' />
-                    <span className='title'>Mega Mewtwo X</span>
-                    <span className='subtitle'>Genetic Pokemon</span>
-
-                    <div className='type'>
-                        <span>Delete</span>
-                        <span>Detail</span>
-                    </div>
-                </Item>
-                <Item>
-                    <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='image' />
-                    <span className='title'>Mega Mewtwo X</span>
-                    <span className='subtitle'>Genetic Pokemon</span>
-
-                    <div className='type'>
-                        <span>Delete</span>
-                        <span>Detail</span>
-                    </div>
-                </Item>
-                <Item>
-                    <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'} alt='image' />
-                    <span className='title'>Mega Mewtwo X</span>
-                    <span className='subtitle'>Genetic Pokemon</span>
-
-                    <div className='type'>
-                        <span>Delete</span>
-                        <span>Detail</span>
-                    </div>
-                </Item>
+                {pokemonDeck.length > 0 ? item() : <WarningBox>You don't have any pokemon.</WarningBox>}
             </ItemList>
         </Wrapper>
     );

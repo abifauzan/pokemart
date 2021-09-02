@@ -1,14 +1,11 @@
 import React from 'react';
 import pokemon_logo from '../../assets/Images/pokemon-logo.png'
-import { FaBeer, FaSearch } from 'react-icons/fa';
 import { IoChevronBackOutline } from 'react-icons/io5';
 import useIsMobile from '../../hooks/useIsMobile'
 import {
     MainHeader,
     NavDesktop,
     Item,
-    SearchBoxMobile,
-    ButtonSearch,
     HeaderTop,
 } from './HeaderStyle'
 import useGetHistory from '../../hooks/useGetHistory';
@@ -19,17 +16,22 @@ function Header(props) {
     const isMobile = useIsMobile()
 
     const logo = (
-        <img src={pokemon_logo} alt='Pokemon Logo' onClick={() => history.push('/')} />
+        <img 
+            src={pokemon_logo} 
+            alt='Pokemon Logo' 
+            onClick={() => history.push('/')} 
+            style={{ cursor: 'pointer'}}
+        />
     )
 
-    const searchBox = (
-        <SearchBoxMobile>
-            <input type='text' name='search' placeholder='Search Pokemon' />
-            <ButtonSearch>
-                <FaSearch />
-            </ButtonSearch>
-        </SearchBoxMobile>
-    )
+    // const searchBox = (
+    //     <SearchBoxMobile>
+    //         <input type='text' name='search' placeholder='Search Pokemon' />
+    //         <ButtonSearch>
+    //             <FaSearch />
+    //         </ButtonSearch>
+    //     </SearchBoxMobile>
+    // )
 
     const header = pathname === '/' ? (
         <>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Color from '../../configs/Color';
-import { SetFont, SetGradient, TextSize, TextWeight } from '../../configs/Mixin';
+import { GetColor, SetFont, SetGradient, TextSize, TextWeight } from '../../configs/Mixin';
 import { Swiper } from 'swiper/react';
 import Media from '../../configs/Media';
 import { motion } from 'framer-motion';
@@ -18,13 +18,17 @@ export const Container = styled.section`
 export const Menu = styled(Swiper)`
     width: 100%;
     padding: 0 0 10px;
+    cursor: pointer;
 
     ${Media.tab`
         padding-bottom: 50px;
     `}
 
     .swiper-wrapper {
+        cursor: pointer;
+
         .swiper-slide {
+            cursor: pointer;
             width: auto;
         }
     }
@@ -34,7 +38,7 @@ export const Item = styled.button`
     /* width: 100%; */
     padding: 10px 20px;
     border-radius: 20px;
-    background: ${({ isactive }) => isactive ? Color.primary : Color.white};
+    background: ${({ isactive, theme }) => isactive ? GetColor(theme).primary : Color.white};
     box-shadow: 5px 5px 10px #e0e0e0,
         -5px -5px 10px #ffffff;
     ${SetFont({
@@ -66,13 +70,14 @@ export const PokemonImage = styled.img`
 `
 
 export const PokemonTitle = styled.h2`
-    margin: 20px 0 10px;
+    padding: 20px 20px 10px;
     ${SetFont({
         size: TextSize.headingLg,
         color: Color.dark.primary,
         weight: TextWeight.bold,
     })}
     text-transform: capitalize;
+    text-align: center;
 `
 
 export const PokemonType = styled.div`
@@ -110,6 +115,7 @@ export const PokemonType = styled.div`
 export const ButtonCatch = styled.button`
 
     margin: 20px 0;
+    cursor: pointer;
 
 `
 
@@ -146,6 +152,7 @@ export const ItemPokemon = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
 
     div.image {
         width: 100%;
@@ -345,7 +352,9 @@ export const DesktopViewCopy = styled.div`
             color: Color.dark.primary,
             weight: TextWeight.bold
         })}
-        margin: 20px 0 20px;
+        margin: 20px;
+        text-align: center;
+        text-transform: capitalize;
     }
 `
 
@@ -528,8 +537,9 @@ export const Hr = styled.hr`
 `
 
 export const LoadingArea = styled.div`
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: center;
-    margin: 30px 0;
+    align-items: center;
+    margin: 30px auto;
 `

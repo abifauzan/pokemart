@@ -45,6 +45,9 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
 `
 
 const Loader = styled.div`

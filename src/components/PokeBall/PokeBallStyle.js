@@ -1,8 +1,5 @@
-import styled, { css, keyframes } from "styled-components";
-import Color from '../../configs/Color';
+import styled, { keyframes } from "styled-components";
 import Media from "../../configs/Media";
-import { SetFont, SetGradient, TextSize, TextWeight, GetColor } from '../../configs/Mixin';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const blink = keyframes`

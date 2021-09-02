@@ -4,11 +4,9 @@ import {
     ButtonCatch, 
     Container, 
     Item, 
-    Main, 
     Menu, 
     PokemonImage, 
     PokemonTitle, 
-    PokemonType,
     List,
     ListItem,
     ItemPokemon,
@@ -16,28 +14,22 @@ import {
     StatsWrapper,
     StatsText,
     ProgressBar,
-    MovesItem,
-    MovesItemText,
     DesktopView,
     DesktopViewPokemon,
     DesktopViewDetail,
     DesktopViewCopy,
     BodyDesktop,
-    DesktopButtonCatch,
     TextColumnThree,
     TextColumnThreeSpan,
     GridTwoColumn,
     GridColumnText,
     GridThreeColumn,
-    DescHeading,
-    DescBody,
-    Hr,
     TypeContainer,
     LoadingArea,
 } from './PokemonDetailStyle';
 import { SwiperSlide } from 'swiper/react';
 import useGetHistory from '../../hooks/useGetHistory';
-import { checkObjectLength, getThemePokemon, getThemePokemonImage, scrollToTop } from '../../helpers/Util';
+import { checkObjectLength, getThemePokemonImage, scrollToTop } from '../../helpers/Util';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import useIsMobile from '../../hooks/useIsMobile';
 import { IoMdMale, IoMdFemale } from 'react-icons/io';
@@ -47,17 +39,18 @@ import useFetchDetail from '../../hooks/useFetchDetail';
 import useFetchEvolution from '../../hooks/useFetchEvolution';
 import useGlobalContext from '../../hooks/useGlobalContext';
 import LoadingPage from '../../components/LoadingPage';
-import LoadingBar from '../../components/LoadingBar';
 import axios from 'axios';
 import PokeBall from '../../components/PokeBall/PokeBall';
+import PopupCapture from '../../components/PopupCapture/PopupCapture';
+import WarningBox from '../../components/WarningBox';
 
 function PokemonDetail(props) {
     const [page, setPage] = useState('general')
     const [mounted, setMounted] = useState(false)
-    const [captureStatus, setCaptureStatus] = useState('idle')
+    const [showPopup, setShowPopup] = useState(false)
     const [pokemons, setPokemons] = useState([])
 
-    const { pathname, history } = useGetHistory()
+    const { history } = useGetHistory()
     const { name: pokemonName } = useParams()
 
     const { theme, setTheme } = useGlobalContext()
@@ -68,12 +61,10 @@ function PokemonDetail(props) {
 
     const {
         data, 
-        loading, 
     } = useFetchDetail(endpoint)
 
     const {
         pokemonLevel,
-        currentPokemonLevel,
         pokemonSpecies,
     } = useFetchEvolution(data.id)
 
@@ -116,6 +107,22 @@ function PokemonDetail(props) {
         }
     }
 
+    const togglePopup = () => {
+        setShowPopup(!showPopup)
+    }
+
+    const handleCapture = () => {
+
+        // We can edit based on base capture stats
+        const chance = Math.random() < 0.5
+
+        setTimeout(() => {
+            // console.log('chance', chance);
+            setShowPopup(chance ? true : false)
+
+        }, 5000);
+    }
+
     // Animation
 
     const variants = {
@@ -141,12 +148,14 @@ function PokemonDetail(props) {
                     <Item
                         onClick={() => setPage('general')}
                         isactive={page === 'general' ? 1 : undefined}
+                        theme={theme}
                     > General </Item>
                 </SwiperSlide>
                 <SwiperSlide>
                     <Item
                         onClick={() => setPage('evolutions')}
                         isactive={page === 'evolutions' ? 1 : undefined}
+                        theme={theme}
                     > Evolutions </Item>
                 </SwiperSlide>
                 <SwiperSlide></SwiperSlide>
@@ -168,8 +177,10 @@ function PokemonDetail(props) {
                     )}
                 </TypeContainer>
                 <PokemonImage src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`} alt={data.name} />
-                <ButtonCatch>
-                    <PokeBall success={true} />
+                <ButtonCatch
+                    onClick={handleCapture}
+                >
+                    <PokeBall success={showPopup} />
                 </ButtonCatch>
 
                 <TextColumnThree>
@@ -361,7 +372,7 @@ function PokemonDetail(props) {
             
                 ) : (
                     <LoadingArea>
-                        <div>No Pokemon Evolutions</div>
+                        <WarningBox>No Pokemon Evolutions</WarningBox>
                     </LoadingArea>
                 )}
                 
@@ -382,8 +393,8 @@ function PokemonDetail(props) {
                     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`} alt={data.name} />
                     <span className='id'>#{data.id}</span>
 
-                    <ButtonCatch onClick={() => console.log('hello')}>
-                        <PokeBall success={true} />
+                    <ButtonCatch onClick={handleCapture}>
+                        <PokeBall success={showPopup} />
                     </ButtonCatch>
 
                 </DesktopViewPokemon>
@@ -398,10 +409,12 @@ function PokemonDetail(props) {
                             <Item
                                 onClick={() => setPage('general')}
                                 isactive={page === 'general' ? 1 : undefined}
+                                theme={theme}
                             > General </Item>
                         </SwiperSlide>
                         <SwiperSlide>
                             <Item
+                                theme={theme}
                                 onClick={() => setPage('evolutions')}
                                 isactive={page === 'evolutions' ? 1 : undefined}
                             > Evolutions </Item>
@@ -612,7 +625,7 @@ function PokemonDetail(props) {
                     
                         ) : (
                             <LoadingArea>
-                                <div>No Pokemon Evolutions</div>
+                                <WarningBox>No Pokemon Evolutions</WarningBox>
                             </LoadingArea>
                         )}
                     </BodyDesktop>
@@ -622,7 +635,16 @@ function PokemonDetail(props) {
     )
 
     return checkObjectLength(data) && mounted
-        ? isMobile ? mobileView : desktopView
+        ? (
+            <>
+                {isMobile ? mobileView : desktopView}
+                <PopupCapture 
+                    isActive={showPopup}
+                    toggleFunction={setShowPopup}
+                    data={data}
+                />
+            </>
+        )
         : <LoadingPage />
     
 }

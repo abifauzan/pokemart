@@ -47,7 +47,6 @@ const useFetchEvolution = (id) => {
 
     const proceedLevelPokemon = () => {
         const {
-            evolution_chain,
             evolves_from_species,
             name: pokemonName
         } = pokemonSpecies
@@ -161,7 +160,7 @@ const useFetchEvolution = (id) => {
 
     useEffect(() => {
         id !== undefined && fetchSpecies(url_pokemonSpecies)
-    }, [id])
+    }, [id, url_pokemonSpecies])
 
     useEffect(() => {
         proceedLevelPokemon()

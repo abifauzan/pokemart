@@ -2,8 +2,7 @@ import styled, { keyframes } from "styled-components";
 import Color from '../../configs/Color';
 import Media from "../../configs/Media";
 import { SetFont, SetGradient, TextSize, TextWeight, GetColor } from '../../configs/Mixin';
-import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import { motion } from 'framer-motion';
 
@@ -50,6 +49,7 @@ export const Heading = styled(motion.div)`
         width: 30px;
         height: 30px;
         color: ${Color.dark.primary};
+        cursor: pointer;
 
         &.rotate {
             animation: 1s ${spin} linear infinite;
@@ -89,6 +89,7 @@ export const Item = styled(motion.div)`
     justify-content: center;
     border-radius: 20px;
     background: ${props => GetColor(props.pokemontype).light};
+    cursor: pointer;
 
     img {
         width: 120px;
@@ -119,6 +120,7 @@ export const ItemDesc = styled.div`
             color: Color.white
         })}
         margin-bottom: 5px;
+        text-align: center;
 
         ${Media.tab`
             ${SetFont({ 
@@ -167,6 +169,7 @@ export const ItemDesktopFirst = styled(motion.div)`
     display: flex;
     flex-direction: column;
     border-radius: 20px; 
+    cursor: pointer;
 
     h2 {
         ${SetFont({
@@ -257,6 +260,7 @@ export const ItemDesktop = styled(motion.div)`
     background: ${Color.white};
     box-shadow: 12px 12px 24px #d9d9d9,
         -12px -12px 24px #ffffff;
+    cursor: pointer;
 
     img {
         width: 120px;

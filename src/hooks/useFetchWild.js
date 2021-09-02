@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { checkObjectLength } from "../helpers/Util"
 
 const baseUrl = 'https://pokeapi.co/api/v2/pokemon/'
 
@@ -17,7 +16,6 @@ const getWildPokemon = () => {
 const useFetchWild = () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
-    const [status, setStatus] = useState('idle')
     const [refetch, setRefetch] = useState(false)
 
     const fetchData = async () => {

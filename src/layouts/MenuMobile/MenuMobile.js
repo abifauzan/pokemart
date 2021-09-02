@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useHistory, useLocation } from "react-router-dom";
+import React from 'react'
+import { useLocation } from "react-router-dom";
 import { BiHomeAlt } from 'react-icons/bi'
 import { AiOutlineUser } from 'react-icons/ai'
 import {

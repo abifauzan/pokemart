@@ -58,6 +58,8 @@ export const getThemePokemon = type => {
             return TYPE_POKEMON.STEEL
         case 'fairy':
             return TYPE_POKEMON.FAIRY
+        default:
+            return TYPE_POKEMON.NORMAL
     }
 }
 
@@ -99,6 +101,8 @@ export const getThemePokemonImage = (type) => {
             return steel
         case 'fairy':
             return fairy
+        default:
+            return normal
     }
 }
 

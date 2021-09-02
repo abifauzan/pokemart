@@ -23,8 +23,6 @@ export const TextWeight = {
 }
 
 export const GetColor = type => {
-    let color = {}
-
     const getTheme = getThemePokemon(type)
 
     switch(getTheme) {

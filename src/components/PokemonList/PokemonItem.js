@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { checkObjectLength, getThemePokemonImage, getImgTypePokemon } from '../../helpers/Util';
+import { checkObjectLength, getImgTypePokemon } from '../../helpers/Util';
 import {
     Item,
     ItemImg,
@@ -8,7 +7,6 @@ import {
     Container,
 } from './PokemonItemStyle'
 import useIsMobile from '../../hooks/useIsMobile';
-import { Link } from 'react-router-dom'
 import useFetchDetail from '../../hooks/useFetchDetail'
 import usePokemonTheme from '../../hooks/usePokemonTheme'
 import SkeletonBox from '../SkeletonBox/SkeletonBox';
@@ -17,8 +15,7 @@ const Loading = <SkeletonBox mode='pokemon' />
 
 function PokemonItem({ data }) {
 
-    const [mounted, setMounted] = useState(false)
-    const { data: pokemon, loading} = useFetchDetail(data.url)
+    const { data: pokemon } = useFetchDetail(data.url)
 
     const pokemonTheme = usePokemonTheme(pokemon)
 

@@ -3,7 +3,7 @@ import {
     REMOVE_POKEMON_FROM_DECK,
 } from "../helpers/Constant"
 
-export default (state, action) => {
+export default function PokemonReducer(state, action) {
     switch (action.type) {
         case ADD_POKEMON_TO_DECK:
             return {

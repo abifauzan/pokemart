@@ -4,7 +4,6 @@ import Media, { sizes } from '../configs/Media';
 import Header from './Header/Header';
 import MenuMobile from './MenuMobile/MenuMobile';
 import useIsMobile from '../hooks/useIsMobile'
-import Color from '../configs/Color';
 import useGetHistory from '../hooks/useGetHistory';
 import LoadingPage from '../components/LoadingPage';
 import { useState } from 'react';

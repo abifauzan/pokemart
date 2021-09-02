@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Color from '../../configs/Color';
 import Media from "../../configs/Media";
-import { SetFont, SetGradient, TextSize, TextWeight } from '../../configs/Mixin';
+import { SetFont, TextSize, TextWeight } from '../../configs/Mixin';
 import { motion } from 'framer-motion';
 
 export const Wrapper = styled.section`
@@ -106,6 +106,7 @@ export const Item = styled(motion.div)`
             margin-left: unset;
             margin-right: 10px;
             position: relative;
+            cursor: pointer;
 
             &:last-child {
                 ${SetFont({

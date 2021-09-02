@@ -30,7 +30,7 @@ const useFetch = (baseUrl = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=10
 
         return () =>
             isCancelled = true
-    }, [])
+    }, [baseUrl])
 
     return {
         data,

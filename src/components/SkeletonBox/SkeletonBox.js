@@ -1,6 +1,6 @@
 import React from 'react';
 import LoadingBar from '../LoadingBar';
-import { BoxDefault, BoxFeature, BoxAll, BoxCollection, BoxPokemon } from './SkeletonBoxStyle';
+import { BoxFeature, BoxAll, BoxCollection, BoxPokemon } from './SkeletonBoxStyle';
 
 function SkeletonBox({ mode }) {
 

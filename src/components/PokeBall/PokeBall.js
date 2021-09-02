@@ -13,8 +13,6 @@ function PokeBall({ onclick, success }) {
         }
     }, [animate])
 
-    console.log(animate);
-
     return (
         <Ball
             onClick={() => setAnimate(true)}
