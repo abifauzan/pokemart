@@ -49,6 +49,7 @@ import useGlobalContext from '../../hooks/useGlobalContext';
 import LoadingPage from '../../components/LoadingPage';
 import LoadingBar from '../../components/LoadingBar';
 import axios from 'axios';
+import PokeBall from '../../components/PokeBall/PokeBall';
 
 function PokemonDetail(props) {
     const [page, setPage] = useState('general')
@@ -167,7 +168,9 @@ function PokemonDetail(props) {
                     )}
                 </TypeContainer>
                 <PokemonImage src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`} alt={data.name} />
-                <ButtonCatch />
+                <ButtonCatch>
+                    <PokeBall success={true} />
+                </ButtonCatch>
 
                 <TextColumnThree>
                     <div>
@@ -379,9 +382,10 @@ function PokemonDetail(props) {
                     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`} alt={data.name} />
                     <span className='id'>#{data.id}</span>
 
-                    <DesktopButtonCatch>
+                    <ButtonCatch onClick={() => console.log('hello')}>
+                        <PokeBall success={true} />
+                    </ButtonCatch>
 
-                    </DesktopButtonCatch>
                 </DesktopViewPokemon>
                 <DesktopViewDetail>
                     <Menu

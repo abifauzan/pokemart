@@ -108,10 +108,7 @@ export const PokemonType = styled.div`
 `
 
 export const ButtonCatch = styled.button`
-    width: 60px;
-    height: 60px;
-    background: ${Color.primary};
-    border-radius: 9999px;
+
     margin: 20px 0;
 
 `
@@ -315,14 +312,6 @@ export const DesktopViewPokemon = styled.div`
         left: 50%;
         transform: translateX(-50%);
     }
-`
-
-export const DesktopButtonCatch = styled.button`
-    width: 80px;
-    height: 80px;
-    border-radius: 9999px;
-    background: ${Color.primary};
-    margin: 20px 0 0;
 `
 
 export const DesktopViewDetail = styled.div`
