@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react'
+import React, { createContext, useReducer, useEffect, useState } from 'react'
 import PokemonReducer from './PokemonReducer'
 import { 
     ADD_POKEMON_TO_DECK,
@@ -18,6 +18,9 @@ export const GlobalContext = createContext(initialState)
 // Provider Component
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(PokemonReducer, initialState)
+
+    // Helper State
+    const [theme, setTheme] = useState('')
 
     useEffect(() => (
         localStorage.setItem('pokemonDeck', JSON.stringify(state.pokemonDeck))
@@ -47,7 +50,9 @@ export const GlobalProvider = ({ children }) => {
         <GlobalContext.Provider value={{
             pokemonDeck: state.pokemonDeck,
             addPokemonToDeck,
-            removePokemonFromDeck
+            removePokemonFromDeck,
+            theme,
+            setTheme,
         }}>
             {children}
         </GlobalContext.Provider>

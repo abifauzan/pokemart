@@ -42,7 +42,7 @@ function Header(props) {
         </>
     ) : (
         <HeaderTop>
-            <IoChevronBackOutline onClick={() => history.goBack()} />
+            <IoChevronBackOutline onClick={() => history.push('/')} />
             {logo}
             <div />
         </HeaderTop>

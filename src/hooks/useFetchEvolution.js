@@ -170,6 +170,7 @@ const useFetchEvolution = (id) => {
     return {
         pokemonLevel,
         currentPokemonLevel,
+        pokemonSpecies,
     }
 }
 

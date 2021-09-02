@@ -21,7 +21,7 @@ export const BoxFeature = styled.div`
 
     ${Media.tab`
         width: auto;
-        height: 100%;
+        height: 271px;
     `}
 `
 

@@ -33,7 +33,8 @@ function PokemonFeature(props) {
     const { history } = useGetHistory()
 
     const {
-        data
+        data,
+        setRefetch,
     } = useFetchWild()
 
     // const pokemonTheme = usePokemonTheme(data)
@@ -184,9 +185,11 @@ function PokemonFeature(props) {
                 <BiRefresh 
                     onClick={() => {
                         setSpin(true)
+                        setRefetch(true)
+                        setMounted(false)
                         setTimeout(() => {
                             setSpin(false)
-                        }, 5000);
+                        }, 3000);
                     }}
                     className={spin ? 'icon rotate' : 'icon'}
                 />

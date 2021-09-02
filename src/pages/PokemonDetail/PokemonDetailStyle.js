@@ -72,6 +72,7 @@ export const PokemonTitle = styled.h2`
         color: Color.dark.primary,
         weight: TextWeight.bold,
     })}
+    text-transform: capitalize;
 `
 
 export const PokemonType = styled.div`
@@ -208,6 +209,7 @@ export const StatsText = styled.span`
         color: Color.dark.primary,
         weight: TextWeight.regular,
     })}
+    text-transform: capitalize;
 
     &.bold {
         font-weight: ${TextWeight.bold};
@@ -229,7 +231,7 @@ export const ProgressBar = styled.div`
         &[value]::-webkit-progress-value {
             /* width: 100%;
             height: 100%; */
-            background: ${SetGradient('grass')};
+            background: ${props => SetGradient(props.pokemontheme).background};
             border-radius: 5px;
         }
 
@@ -276,7 +278,7 @@ export const DesktopView = styled(motion.section)`
     width: 100%;
     /* height: calc(100vh - 210px); */
     max-height: 700px;
-    background: ${SetGradient('electric', 33).background};
+    background: ${props => SetGradient(props.pokemontheme, 33).background};
     border-radius: 20px;
     margin-top: 30px;
     position: relative;
@@ -445,7 +447,7 @@ export const TextColumnThreeSpan = styled.span`
     &:last-child {
         ${SetFont({
             size: TextSize.body,
-            color: Color.primary,
+            color: Color.dark.primary,
             weight: TextWeight.bold,
         })}
     }
@@ -488,10 +490,11 @@ export const GridThreeColumn = styled(GridTwoColumn)`
 
 export const GridColumnText = styled.span`
     ${SetFont({
-        size: TextSize.body,
-        color: Color.greyText,
+        size: TextSize.bodySm,
+        color: Color.dark.primary,
         weight: TextWeight.regular,
     })}
+    text-transform: capitalize;
     &.bold {
         ${SetFont({
             size: TextSize.body,
@@ -533,4 +536,11 @@ export const DescBody = styled(DescHeading)`
 
 export const Hr = styled.hr`
     margin: 20px;
+`
+
+export const LoadingArea = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
 `

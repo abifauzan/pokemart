@@ -48,7 +48,7 @@ function PokemonList(props) {
         <Wrapper>
             <Heading>
                 <h2>All Pokemon</h2>
-                <BiRefresh 
+                {/* <BiRefresh 
                     onClick={() => {
                         setSpin(true)
                         setTimeout(() => {
@@ -56,7 +56,7 @@ function PokemonList(props) {
                         }, 5000);
                     }}
                     className={spin ? 'icon rotate' : 'icon'}
-                />
+                /> */}
             </Heading>
 
             {infiniteScroll}

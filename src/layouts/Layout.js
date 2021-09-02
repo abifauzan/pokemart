@@ -8,6 +8,8 @@ import Color from '../configs/Color';
 import useGetHistory from '../hooks/useGetHistory';
 import LoadingPage from '../components/LoadingPage';
 import { useState } from 'react';
+import useGlobalContext from '../hooks/useGlobalContext';
+import { GetColor } from '../configs/Mixin';
 
 const MainLayout = styled.main`
     width: 100%;
@@ -38,29 +40,27 @@ const MainContainer = styled.div`
     `}
 `
 
-const ContentBlur = styled.div`
-    div.blurTop {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: -140px;
-        width: 300px;
-        height: 300px;
-        border-radius: 9999px;
-        background: ${Color.grass.light};
-        filter: blur(30px);
-    }
+export const BlurTop = styled.div`
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -140px;
+    width: 300px;
+    height: 300px;
+    border-radius: 9999px;
+    background: ${props => GetColor(props.theme).light};
+    filter: blur(30px);
+`
 
-    div.blurBottom {
-        position: absolute;
-        bottom: -20px;
-        right: -100px;
-        width: 250px;
-        height: 250px;
-        border-radius: 9999px;
-        background: ${Color.grass.primary};
-        filter: blur(100px);
-    }
+export const BlurBottom = styled.div`
+    position: absolute;
+    bottom: -20px;
+    right: -100px;
+    width: 250px;
+    height: 250px;
+    border-radius: 9999px;
+    background: ${props => GetColor(props.theme).primary};
+    filter: blur(100px);
 `
 
 function Layout({ children }) {
@@ -69,11 +69,13 @@ function Layout({ children }) {
     const isMobile = useIsMobile()
     const { pathname } = useGetHistory()
     const pokemonDetailPage = pathname.split('/')[1] === 'pokemon'
+    const { theme } = useGlobalContext()
 
     useEffect(() => {
-        setTimeout(() => {
-            setMounted(true)
-        }, 1000);
+        // setTimeout(() => {
+        //     setMounted(true)
+        // }, 1000);
+        setMounted(true)
     }, [])
 
     return mounted ? (
@@ -83,11 +85,11 @@ function Layout({ children }) {
                 {isMobile && <MenuMobile />}
                 {children}
             </MainContainer>
-            {pokemonDetailPage && isMobile && (
-                <ContentBlur>
-                    <div className='blurTop' />
-                    <div className='blurBottom' />
-                </ContentBlur>
+            {pokemonDetailPage && isMobile && theme !== '' && (
+                <div>
+                    <BlurTop theme={theme} />
+                    <BlurBottom theme={theme} />
+                </div>
             )}
             
         </MainLayout>
