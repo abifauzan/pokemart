@@ -1,6 +1,7 @@
 # Project Title
 
 Pokemon Web using pokeapi.co
+* [Demo Here](https://6130d79493e16ec6794ff5a0--elated-mcclintock-36039f.netlify.app/)
 
 ## Description
 
@@ -13,7 +14,6 @@ Website about displaying All Pokemons including legendary pokemon and simulating
 * react-router-dom
 * axios
 * framer-motion
-* react-icons
 * react-icons
 * react-infinite-scroll-component
 * styled-components
